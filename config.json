@@ -1,0 +1,29 @@
+{
+    "token": "MTAyNjUxMTkxOTQ5NjA0MDQ2OA.Gk_aSY.MNEM-2KJVNEzE8h0cYP2FYtMyyqwGP8-rqGtWc",
+    "clientId": "1026511919496040468",
+    "guildId": "1019935604391297024",
+    "rssFeed": "https://nfs.faireconomy.media/ff_calendar_thisweek.json",
+    "cron": {
+        "eu": "30 8 * * 1-5",
+        "us": "30 13 * * 1-5",
+        "userCleanUp": "0 9 * * *"
+    },
+    "channels": {
+        "memes": {
+            "retail": 1029677907754356766,
+            "burn": 1052902599789125662
+        },
+        "economicCalendar": 1027159928361725982,
+        "setups": 1037487852721815682,
+        "general": 1019935604391297027,
+        "bot": {
+            "actions": 1037630225149874216
+        }
+    },
+    "bot": {
+        "id": 1026511919496040468
+    },
+    "admin": {
+        "discriminator": 6721
+    }
+}

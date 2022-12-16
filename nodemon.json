@@ -1,0 +1,15 @@
+{
+    "restartable": "rs",
+    "ignore": [
+        "repository/db.js",
+        ".git",
+        "node_modules/**/node_modules"
+    ],
+    "verbose": false,
+    "events": {
+        "restart": "echo 'App restarted due to: '$FILENAME''"
+    },
+    "watch": [
+        "**/*.js"
+    ]
+}
