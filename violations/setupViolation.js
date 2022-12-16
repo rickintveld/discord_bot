@@ -1,5 +1,5 @@
 import config from "../config.json" assert { type: "json" };
-import violationRepository from "../repository/violationRepository.js";
+import violationRepository from "../repository/setupViolationRepository.js";
 import guildRepository from "../repository/guildRepository.js";
 
 const setupViolation = async (client) => {

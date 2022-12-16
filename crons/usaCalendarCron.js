@@ -17,17 +17,18 @@ const usaCalendarCron = async (client) => {
     });
 
   if (!events) {
-    console.log("No USD news today");
+    console.error("No USD news today");
     return;
   }
 
-  const news = 0;
+  const news = [];
   for (const event of events) {
     news.push(message(event));
   }
 
-  const channel = await client.channels.fetch(config.channels.economicCalendar);
+  const channel = await client.channels.fetch("1027159928361725982");
   if (channel && news.length > 0) {
+    console.log("Sending USD news", news);
     await channel.send(news.join("\n"));
   } else {
     console.error("No USD news today");

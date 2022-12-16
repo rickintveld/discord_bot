@@ -3,7 +3,7 @@ import { fileURLToPath } from "url";
 import { Low } from "lowdb";
 import { JSONFile } from "lowdb-node";
 
-const violationRepository = {
+const retailViolationRepository = {
   add,
   remove,
   fetch,
@@ -16,7 +16,7 @@ async function add(user_id, username, strike) {
   const database = await this._database();
   await database.read();
 
-  database.data.setup_violations.push({
+  database.data.retail_violations.push({
     user_id: user_id,
     username: username,
     strike: strike,
@@ -29,13 +29,13 @@ async function fetch(user_id) {
   const database = await this._database();
   await database.read();
 
-  const { setup_violations } = database.data;
+  const { retail_violations } = database.data;
 
-  if (setup_violations.length === 0) {
+  if (retail_violations.length === 0) {
     return null;
   }
 
-  const user = setup_violations.find((s) => s.user_id === user_id);
+  const user = retail_violations.find((s) => s.user_id === user_id);
 
   return user;
 }
@@ -44,12 +44,12 @@ async function update(user_id, username, strike) {
   const database = await this._database();
   await database.read();
 
-  const { setup_violations } = database.data;
+  const { retail_violations } = database.data;
 
-  const users = setup_violations.filter((u) => u.user_id !== user_id);
-  database.data.setup_violations = users;
+  const users = retail_violations.filter((u) => u.user_id !== user_id);
+  database.data.retail_violations = users;
 
-  database.data.setup_violations.push({
+  database.data.retail_violations.push({
     user_id: user_id,
     username: username,
     strike: strike,
@@ -62,10 +62,10 @@ async function remove(user_id) {
   const database = await this._database();
   await database.read();
 
-  const { setup_violations } = database.data;
+  const { retail_violations } = database.data;
 
-  const users = setup_violations.filter((u) => u.user_id !== user_id);
-  database.data.setup_violations = users;
+  const users = retail_violations.filter((u) => u.user_id !== user_id);
+  database.data.retail_violations = users;
 
   await database.write();
 }
@@ -85,13 +85,13 @@ async function _database() {
 async function _createTable(database) {
   await database.read();
 
-  if (database.data?.setup_violations) {
+  if (database.data?.retail_violations) {
     return;
   }
 
-  database.data ||= { setup_violations: [] };
+  database.data ||= { retail_violations: [] };
 
   await database.write();
 }
 
-export default violationRepository;
+export default retailViolationRepository;

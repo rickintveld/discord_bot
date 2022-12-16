@@ -1,6 +1,7 @@
 import config from "../config.json" assert { type: "json" };
 import retail from "../utils/retail.js";
 import guildRepository from "../repository/guildRepository.js";
+import retailViolationRepository from "../repository/retailViolationRepository.js";
 
 const retailViolation = async (client) => {
   client.on("messageCreate", async (message) => {
@@ -36,17 +37,30 @@ const retailViolation = async (client) => {
         )} :face_with_monocle:`
       );
 
-      if (Number(member.user.discriminator) === config.admin.discriminator) {
-        return false;
-      }
-
       try {
-        await guildRepository.timeout(10 * 1000, "No retail bs allowed");
+        if (Number(member.user.discriminator) !== config.admin.discriminator) {
+          await guildRepository.timeout(10 * 1000, "No retail bs allowed");
+        }
+        await saveViolation(member.user.id, member.user.username);
       } catch (error) {
         console.log(error);
       }
     }
   });
 };
+
+async function saveViolation(userId, username) {
+  const violator = await retailViolationRepository.fetch(userId);
+
+  if (violator === null) {
+    await retailViolationRepository.add(userId, username, 1);
+  } else {
+    await retailViolationRepository.update(
+      userId,
+      violator.username,
+      violator.strike + 1
+    );
+  }
+}
 
 export default retailViolation;
