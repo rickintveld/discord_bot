@@ -2,11 +2,12 @@ import config from "../../config.json" assert { type: "json" };
 
 const setupRepository = { insert };
 
-async function insert(username) {
+async function insert(username, imageUrl) {
   const date = new Date();
 
   const body = {
     username: username,
+    image: imageUrl,
     date: date.toISOString(),
   };
 

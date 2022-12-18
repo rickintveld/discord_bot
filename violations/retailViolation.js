@@ -39,7 +39,7 @@ const retailViolation = async (client) => {
 
       try {
         if (Number(member.user.discriminator) !== config.admin.discriminator) {
-          await guildRepository.timeout(10 * 1000, "No retail bs allowed");
+          await guildRepository.timeout(member, "No retail bs allowed");
         }
         await saveViolation(member.user.id, member.user.username);
       } catch (error) {

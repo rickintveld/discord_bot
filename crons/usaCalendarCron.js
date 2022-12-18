@@ -26,7 +26,7 @@ const usaCalendarCron = async (client) => {
     news.push(message(event));
   }
 
-  const channel = await client.channels.fetch("1027159928361725982");
+  const channel = await client.channels.fetch(config.channels.economicCalendar);
   if (channel && news.length > 0) {
     console.log("Sending USD news", news);
     await channel.send(news.join("\n"));
