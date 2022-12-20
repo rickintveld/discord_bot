@@ -1,8 +1,8 @@
-import config from "../config.json" assert { type: "json" };
-import { dateCompare } from "../utils/dateCompare.js";
-import guildRepository from "../repository/guildRepository.js";
+import config from "../../../config.json" assert { type: "json" };
+import { dateCompare } from "../../utilities/dateCompare.js";
+import guildRepository from "../../repository/guildRepository.js";
 
-const cleanUpUsersWithoutRolesCron = async (client) => {
+const without_role = async (client) => {
   const guild = await client.guilds.fetch(config.guildId);
   const members = await guild.members.fetch();
 
@@ -15,13 +15,11 @@ const cleanUpUsersWithoutRolesCron = async (client) => {
   const channel = await client.channels.fetch(config.channels.general);
 
   membersWithoutRoles.each((member) => {
-    if (channel) {
-      channel.send(
-        `User ${member.user.username} is kicked from the group for inactivity :wave:`
-      );
-    }
+    channel.send(
+      `User ${member.user.username} is kicked from the group for inactivity :wave:`
+    );
     guildRepository.kick(guild, member.user.id);
   });
 };
 
-export default cleanUpUsersWithoutRolesCron;
+export default without_role;

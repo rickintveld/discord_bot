@@ -4,9 +4,13 @@
     "guildId": "1019935604391297024",
     "rssFeed": "https://nfs.faireconomy.media/ff_calendar_thisweek.json",
     "cron": {
-        "eu": "30 8 * * 1-5",
-        "us": "30 13 * * 1-5",
-        "userCleanUp": "0 9 * * *"
+        "economic_calendar": {
+            "europe": "30 8 * * 1-5",
+            "new_york": "30 13 * * 1-5"
+        },
+        "user": {
+            "without_role": "0 9 * * *"
+        }
     },
     "channels": {
         "memes": {
@@ -15,6 +19,7 @@
         },
         "economicCalendar": "1027159928361725982",
         "setups": 1037487852721815682,
+        "winners": 1026494367000690708,
         "general": "1019935604391297027",
         "bot": {
             "actions": 1037630225149874216

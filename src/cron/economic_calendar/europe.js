@@ -1,8 +1,8 @@
-import config from "../config.json" assert { type: "json" };
+import config from "../../../config.json" assert { type: "json" };
 import axios from "axios";
-import message from "../utils/message.js";
+import message from "../../utilities/message.js";
 
-const europeCalendarCron = async (client) => {
+const europe = async (client) => {
   const response = await axios.get(config.rssFeed);
 
   const events = response.data
@@ -17,7 +17,7 @@ const europeCalendarCron = async (client) => {
     });
 
   if (!events) {
-    console.error("No EU news today");
+    console.error("No EU / GBP news today");
     return;
   }
 
@@ -27,7 +27,8 @@ const europeCalendarCron = async (client) => {
   }
 
   const channel = await client.channels.fetch(config.channels.economicCalendar);
-  if (channel && news.length > 0) {
+
+  if (news.length > 0) {
     console.log("Sending EU / GBP news", news);
     await channel.send(news.join("\n"));
   } else {
@@ -35,4 +36,4 @@ const europeCalendarCron = async (client) => {
   }
 };
 
-export default europeCalendarCron;
+export default europe;

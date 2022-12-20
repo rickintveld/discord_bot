@@ -1,4 +1,4 @@
-const retail = [
+const retailKeywords = [
   "support",
   "resistance",
   "fakeout",
@@ -37,4 +37,4 @@ const retail = [
   "moving average",
 ];
 
-export default retail;
+export default retailKeywords;

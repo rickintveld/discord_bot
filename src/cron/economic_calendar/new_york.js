@@ -1,8 +1,8 @@
-import config from "../config.json" assert { type: "json" };
+import config from "../../../config.json" assert { type: "json" };
 import axios from "axios";
-import message from "../utils/message.js";
+import message from "../../utilities/message.js";
 
-const usaCalendarCron = async (client) => {
+const new_york = async (client) => {
   const response = await axios.get(config.rssFeed);
 
   const events = response.data
@@ -27,7 +27,8 @@ const usaCalendarCron = async (client) => {
   }
 
   const channel = await client.channels.fetch(config.channels.economicCalendar);
-  if (channel && news.length > 0) {
+
+  if (news.length > 0) {
     console.log("Sending USD news", news);
     await channel.send(news.join("\n"));
   } else {
@@ -35,4 +36,4 @@ const usaCalendarCron = async (client) => {
   }
 };
 
-export default usaCalendarCron;
+export default new_york;

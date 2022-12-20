@@ -1,12 +1,13 @@
-import config from "../config.json" assert { type: "json" };
-import violationRepository from "../repository/setupViolationRepository.js";
-import guildRepository from "../repository/guildRepository.js";
+import config from "../../../config.json" assert { type: "json" };
+import setupViolationRepository from "../../repository/setupViolationRepository.js";
+import guildRepository from "../../repository/guildRepository.js";
 
-const setupViolation = async (client) => {
+const setup_thread_usage = async (client) => {
   client.on("messageCreate", async (message) => {
     const channelId = message.channelId;
     if (Number(channelId) !== config.channels.setups) return false;
     if (Number(message.author.id) === config.bot.id) return false;
+    if ([18, 21].includes(message.type)) return false;
 
     const hasAttachments = message.attachments.size;
     const hasUrlPattern = new RegExp(
@@ -20,7 +21,7 @@ const setupViolation = async (client) => {
     const username = message.author.username;
     const user_id = message.author.id;
 
-    const user = await violationRepository.fetch(user_id);
+    const user = await setupViolationRepository.fetch(user_id);
     let strike = user?.strike ?? 0;
 
     let replyMessage =
@@ -30,19 +31,19 @@ const setupViolation = async (client) => {
       case 1:
         replyMessage =
           "Please use threads for discussion or questions about setups :angry:";
-        await violationRepository.update(user_id, username, 2);
+        await setupViolationRepository.update(user_id, username, 2);
         break;
       case 2:
         replyMessage = `I'm watching you ${username}, last warning, use threads :warning:`;
-        await violationRepository.update(user_id, username, 3);
+        await setupViolationRepository.update(user_id, username, 3);
         break;
       case 3:
         replyMessage = `Yoo wtf ${username}, use THREADS. Timeout incoming :wave:`;
-        await violationRepository.remove(user_id);
+        await setupViolationRepository.remove(user_id);
         break;
       default:
         console.log(`Adding ${username} to the violators`);
-        await violationRepository.add(user_id, username, 1);
+        await setupViolationRepository.add(user_id, username, 1);
     }
 
     if (strike === 3) {
@@ -52,14 +53,14 @@ const setupViolation = async (client) => {
         return false;
       }
 
-      await message.channel.send(
+      await message.reply(
         `${username} received a 10 seconde timeout for not using threads!`
       );
       await guildRepository.timeout(member, "Timeout for not using threads");
     } else {
-      await message.channel.send(replyMessage);
+      await message.reply(replyMessage);
     }
   });
 };
 
-export default setupViolation;
+export default setup_thread_usage;

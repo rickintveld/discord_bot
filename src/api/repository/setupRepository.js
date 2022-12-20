@@ -1,14 +1,10 @@
-import config from "../../config.json" assert { type: "json" };
+import config from "../../../config.json" assert { type: "json" };
 
-const setupRepository = { insert };
+const setupRepository = { save };
 
-async function insert(username, imageUrl) {
-  const date = new Date();
-
+async function save() {
   const body = {
-    username: username,
-    image: imageUrl,
-    date: date.toISOString(),
+    date: new Date().toISOString,
   };
 
   const headers = {
@@ -24,7 +20,7 @@ async function insert(username, imageUrl) {
   };
 
   try {
-    await fetch("http://localhost:3001/user/insert-setup", requestOptions);
+    await fetch("http://localhost:3001/shared_setup/add", requestOptions);
   } catch (e) {
     console.error(e);
   }
