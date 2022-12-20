@@ -26,7 +26,9 @@ const new_york = async (client) => {
     news.push(message(event));
   }
 
-  const channel = await client.channels.fetch(config.channels.economicCalendar);
+  const channel = await client.channels.fetch(
+    config.channels.economic_calendar
+  );
 
   if (news.length > 0) {
     console.log("Sending USD news", news);

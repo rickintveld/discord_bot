@@ -4,10 +4,6 @@ import cron from "node-cron";
 import crons from "./cron/crons.js";
 import message from "./message/message.js";
 
-const bot = {
-  start,
-};
-
 function start() {
   const client = new Client({
     intents: [
@@ -25,8 +21,10 @@ function start() {
     console.log(`${client.user.username} is online.`);
   });
 
+  message.reaction.new_user(client);
   message.reaction.setup(client);
   message.reaction.winner(client);
+
   message.violation.retail(client);
   message.violation.setup_thread_usage(client);
 
@@ -42,5 +40,7 @@ function start() {
 
   client.login(config.token);
 }
+
+const bot = { start };
 
 export default bot;
