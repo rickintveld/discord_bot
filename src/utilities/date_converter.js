@@ -1,4 +1,4 @@
-const dateConverter = (dateTime) => {
+const date_converter = (dateTime) => {
   let date = new Date(dateTime).toLocaleString("nl-NL", {
     timeZone: "Europe/London",
   });
@@ -8,4 +8,4 @@ const dateConverter = (dateTime) => {
   return date;
 };
 
-export default dateConverter;
+export default date_converter;

@@ -1,4 +1,5 @@
 import config from "../../../config.json" assert { type: "json" };
+import axios from "axios";
 
 const setupRepository = { save };
 
@@ -20,7 +21,7 @@ async function save() {
   };
 
   try {
-    await fetch("http://localhost:3001/shared_setup/add", requestOptions);
+    await axios.post("http://localhost:3001/shared_setup/add", requestOptions);
   } catch (e) {
     console.error(e);
   }

@@ -1,5 +1,5 @@
 import config from "../../../config.json" assert { type: "json" };
-import retailKeywords from "../../utilities/retailKeywords.js";
+import retail_keywords from "../../utilities/retail_keywords.js";
 import guildRepository from "../../repository/guildRepository.js";
 import retailViolationService from "../../service/retailViolationService.js";
 
@@ -16,14 +16,14 @@ const retail = async (client) => {
     const content = message.content.toLowerCase().split(" ");
 
     let violations = [];
-    for (let index = 0; index < retailKeywords.length; index++) {
-      let isRetail = content.includes(retailKeywords[index]);
+    for (let index = 0; index < retail_keywords.length; index++) {
+      let isRetail = content.includes(retail_keywords[index]);
 
       if (!isRetail) {
         continue;
       }
 
-      violations.push(retailKeywords[index]);
+      violations.push(retail_keywords[index]);
     }
 
     violations.filter((x) => (x = x));

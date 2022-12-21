@@ -1,6 +1,6 @@
 import config from "../../../config.json" assert { type: "json" };
 import axios from "axios";
-import message from "../../utilities/message.js";
+import message_map from "../../utilities/message.js";
 
 const europe = async (client) => {
   const response = await axios.get(config.rssFeed);
@@ -21,20 +21,20 @@ const europe = async (client) => {
     return;
   }
 
-  const news = [];
-  for (const event of events) {
-    news.push(message(event));
-  }
-
   const channel = await client.channels.fetch(
     config.channels.economic_calendar
   );
 
-  if (news.length > 0) {
-    console.log("Sending EU / GBP news", news);
-    await channel.send(news.join("\n"));
-  } else {
-    console.error("No EU news today");
+  try {
+    channel.send(message_map(events));
+  } catch (e) {
+    console.log(e);
+  }
+
+  try {
+    channel.send(high_impact_news(events));
+  } catch (e) {
+    console.log(e);
   }
 };
 

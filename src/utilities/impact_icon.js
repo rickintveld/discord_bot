@@ -1,4 +1,4 @@
-const impactIcon = (impact) => {
+const impact_icon = (impact) => {
   let icon = ":red_circle:";
 
   switch (impact) {
@@ -15,4 +15,4 @@ const impactIcon = (impact) => {
   return icon;
 };
 
-export default impactIcon;
+export default impact_icon;

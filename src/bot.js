@@ -21,13 +21,6 @@ function start() {
     console.log(`${client.user.username} is online.`);
   });
 
-  message.reaction.new_user(client);
-  message.reaction.setup(client);
-  message.reaction.winner(client);
-
-  message.violation.retail(client);
-  message.violation.setup_thread_usage(client);
-
   cron.schedule(config.cron.economic_calendar.europe, async () => {
     crons.economic_calender.europe(client);
   });
@@ -37,6 +30,13 @@ function start() {
   cron.schedule(config.cron.economic_calendar.new_york, async () => {
     crons.economic_calender.new_york(client);
   });
+
+  message.reaction.new_user(client);
+  message.reaction.setup(client);
+  message.reaction.winner(client);
+
+  message.violation.retail(client);
+  message.violation.setup_thread_usage(client);
 
   client.login(config.token);
 }

@@ -1,4 +1,4 @@
-const flagMap = (country) => {
+const flag_map = (country) => {
   let flag = ":flag_us:";
 
   switch (country) {
@@ -18,4 +18,4 @@ const flagMap = (country) => {
   return flag;
 };
 
-export default flagMap;
+export default flag_map;

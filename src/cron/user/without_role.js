@@ -1,5 +1,5 @@
 import config from "../../../config.json" assert { type: "json" };
-import { dateCompare } from "../../utilities/dateCompare.js";
+import { dateCompare } from "../../utilities/date_compare.js";
 import guildRepository from "../../repository/guildRepository.js";
 
 const without_role = async (client) => {

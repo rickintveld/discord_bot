@@ -1,19 +1,29 @@
-import impactIcon from "./impactIcon.js";
-import flagMap from "./flag.js";
-import dateConverter from "./dateConverter.js";
+import impact_icon from "./impact_icon.js";
+import flag_map from "./flag.js";
+import date_converter from "./date_converter.js";
 
-const messageMap = (event) => {
-  const message =
-    flagMap(event.country) +
-    " " +
-    event.title +
-    " " +
-    impactIcon(event.impact) +
-    " " +
-    dateConverter(event.date) +
-    " :clock1:";
+const message_map = (events) => {
+  const news = [];
 
-  return message;
+  for (const event of events) {
+    const message =
+      flag_map(event.country) +
+      " " +
+      event.title +
+      " " +
+      impact_icon(event.impact) +
+      " " +
+      date_converter(event.date) +
+      " :clock1:";
+
+    news.push(message);
+  }
+
+  if (news.length > 0) {
+    return news.join("\n");
+  }
+
+  throw new Error("No news today");
 };
 
-export default messageMap;
+export default message_map;
