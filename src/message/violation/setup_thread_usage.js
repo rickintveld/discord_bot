@@ -4,22 +4,15 @@ import guildRepository from "../../repository/guildRepository.js";
 import has_attachments from "../../utilities/has_attachments.js";
 import contains_url from "../../utilities/contains_url.js";
 import is_bot from "../../utilities/is_bot.js";
+import is_admin from "../../utilities/is_admin.js";
 
 import { MessageType } from "discord.js";
 
 const setup_thread_usage = async (client) => {
   client.on("messageCreate", async (message) => {
-    const channelId = message.channelId;
-    if (Number(channelId) !== config.channels.setups) return false;
+    if (is_channel_allowed(message)) return false;
     if (is_bot(message)) return false;
-    if (
-      [MessageType.ThreadCreated, MessageType.ThreadStarterMessage].includes(
-        message.type
-      )
-    ) {
-      return false;
-    }
-
+    if (is_message_type_allowed(message)) return false;
     if (has_attachments(message) || contains_url(message)) {
       return false;
     }
@@ -41,24 +34,14 @@ const setup_thread_usage = async (client) => {
           "Please use threads for discussion or questions about setups :angry:";
         await setupViolationRepository.update(user_id);
         break;
-      case 2:
-        replyMessage = `I'm watching you ${username}, last warning, use threads :warning:`;
-        await setupViolationRepository.update(user_id);
-        break;
-      case 3:
-        replyMessage = `Yoo ${username}, use THREADS. Timeout incoming :wave:`;
-        await setupViolationRepository.remove(user_id);
-        break;
       default:
         await setupViolationRepository.add(user_id, username, 1);
     }
 
-    if (strike === 3) {
+    if (strike > 2) {
       const member = await message.guild.members.fetch(user_id);
 
-      if (Number(member.user.discriminator) === config.admin.discriminator) {
-        return false;
-      }
+      if (is_admin(member)) return false;
 
       await message.reply(
         `${username} received a 10 seconde timeout for not using threads!`
@@ -68,6 +51,16 @@ const setup_thread_usage = async (client) => {
       await message.reply(replyMessage);
     }
   });
+};
+
+const is_channel_allowed = (message) => {
+  return Number(message.channelId) !== config.channels.setups;
+};
+
+const is_message_type_allowed = (message) => {
+  return [MessageType.ThreadCreated, MessageType.ThreadStarterMessage].includes(
+    message.type
+  );
 };
 
 export default setup_thread_usage;

@@ -6,7 +6,7 @@
     "cron": {
         "economic_calendar": {
             "europe": "30 8 * * 1-5",
-            "new_york": "30 13 * * 1-5"
+            "new_york": "15 12 * * 1-5"
         },
         "user": {
             "without_role": "0 9 * * *"

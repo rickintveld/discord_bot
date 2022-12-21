@@ -3,19 +3,12 @@ import retail_keywords from "../../utilities/retail_keywords.js";
 import guildRepository from "../../repository/guildRepository.js";
 import retailViolationService from "../../service/retailViolationService.js";
 import is_bot from "../../utilities/is_bot.js";
+import is_admin from "../../utilities/is_admin.js";
 
 const retail = async (client) => {
   client.on("messageCreate", async (message) => {
-    const memeChannels = config.channels.memes;
-
     if (is_bot(message)) return false;
-    if (
-      [memeChannels.retail, memeChannels.roast].includes(
-        Number(message.channelId)
-      )
-    ) {
-      return false;
-    }
+    if (is_channel_allowed(message)) return false;
 
     const content = message.content.toLowerCase().split(" ");
 
@@ -23,9 +16,7 @@ const retail = async (client) => {
     for (let index = 0; index < retail_keywords.length; index++) {
       let isRetail = content.includes(retail_keywords[index]);
 
-      if (!isRetail) {
-        continue;
-      }
+      if (!isRetail) continue;
 
       violations.push(retail_keywords[index]);
     }
@@ -42,7 +33,7 @@ const retail = async (client) => {
       );
 
       try {
-        if (Number(member.user.discriminator) !== config.admin.discriminator) {
+        if (!is_admin(member)) {
           await guildRepository.timeout(member, "No retail bs allowed");
         }
         await retailViolationService.add(member.user);
@@ -51,6 +42,14 @@ const retail = async (client) => {
       }
     }
   });
+};
+
+const is_channel_allowed = (message) => {
+  const memeChannels = config.channels.memes;
+
+  return [memeChannels.retail, memeChannels.roast].includes(
+    Number(message.channelId)
+  );
 };
 
 export default retail;
