@@ -2,10 +2,10 @@ import config from "../../../config.json" assert { type: "json" };
 import winnerCreateService from "../../service/winnerCreateService.js";
 import has_attachments from "../../utilities/has_attachments.js";
 import contains_url from "../../utilities/contains_url.js";
-import { MessageType } from "discord.js";
+import { Events, MessageType } from "discord.js";
 
 const winner = async (client) => {
-  client.on("messageCreate", async (message) => {
+  client.on(Events.MessageCreate, async (message) => {
     const channelId = message.channelId;
     if (Number(channelId) !== config.channels.winners) return false;
     if (Number(message.author.id) === config.bot.id) return false;

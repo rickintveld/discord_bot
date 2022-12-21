@@ -4,9 +4,10 @@ import guildRepository from "../../repository/guildRepository.js";
 import retailViolationService from "../../service/retailViolationService.js";
 import is_bot from "../../utilities/is_bot.js";
 import is_admin from "../../utilities/is_admin.js";
+import { Events } from "discord.js";
 
 const retail = async (client) => {
-  client.on("messageCreate", async (message) => {
+  client.on(Events.MessageCreate, async (message) => {
     if (is_bot(message)) return false;
     if (is_channel_allowed(message)) return false;
 

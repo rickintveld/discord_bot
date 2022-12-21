@@ -29,13 +29,13 @@ const new_york = async (client) => {
   try {
     channel.send(message_map(events));
   } catch (e) {
-    console.log(e);
+    console.warn(e.message);
   }
 
   try {
     channel.send(high_impact_news(events));
   } catch (e) {
-    console.log(e);
+    console.error(e.message);
   }
 };
 

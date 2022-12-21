@@ -6,10 +6,10 @@ import contains_url from "../../utilities/contains_url.js";
 import is_bot from "../../utilities/is_bot.js";
 import is_admin from "../../utilities/is_admin.js";
 
-import { MessageType } from "discord.js";
+import { Events, MessageType } from "discord.js";
 
 const setup_thread_usage = async (client) => {
-  client.on("messageCreate", async (message) => {
+  client.on(Events.MessageCreate, async (message) => {
     if (is_channel_allowed(message)) return false;
     if (is_bot(message)) return false;
     if (is_message_type_allowed(message)) return false;

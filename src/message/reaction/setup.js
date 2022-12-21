@@ -3,10 +3,10 @@ import setupController from "../../api/controller/setupController.js";
 import is_bot from "../../utilities/is_bot.js";
 import has_attachments from "../../utilities/has_attachments.js";
 import contains_url from "../../utilities/contains_url.js";
-import { MessageType } from "discord.js";
+import { Events, MessageType } from "discord.js";
 
 const setup = async (client) => {
-  client.on("messageCreate", async (message) => {
+  client.on(Events.MessageCreate, async (message) => {
     if (is_channel_allowed(message)) return false;
     if (is_bot(message)) return false;
     if (is_message_type_allowed(message)) return false;

@@ -1,7 +1,8 @@
 import config from "../../../config.json" assert { type: "json" };
+import { Events } from "discord.js";
 
 const new_user = async (client) => {
-  client.on("guildMemberAdd", async (member) => {
+  client.on(Events.GuildMemberAdd, async (member) => {
     const channel = member.guild.channels.get(config.channels.new_member);
     const rulesChannel = member.guild.channels.get(config.channels.new_member);
 

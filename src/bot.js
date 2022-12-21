@@ -1,4 +1,4 @@
-import { Client, GatewayIntentBits, Partials } from "discord.js";
+import { Client, Events, GatewayIntentBits, Partials } from "discord.js";
 import config from "../config.json" assert { type: "json" };
 import cron from "node-cron";
 import crons from "./cron/crons.js";
@@ -13,11 +13,12 @@ function start() {
       GatewayIntentBits.GuildBans,
       GatewayIntentBits.GuildMessages,
       GatewayIntentBits.MessageContent,
+      GatewayIntentBits.GuildEmojisAndStickers,
     ],
     partials: [Partials.Channel, Partials.GuildMember],
   });
 
-  client.once("ready", async () => {
+  client.once(Events.ClientReady, async () => {
     console.log(`${client.user.username} is online.`);
   });
 
