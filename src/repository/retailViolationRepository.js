@@ -16,10 +16,14 @@ async function add(user_id, username, strike) {
   const database = await this._database();
   await database.read();
 
+  const date = new Date();
+
   database.data.retail_violations.push({
     user_id: user_id,
     username: username,
     strike: strike,
+    created: date.toISOString(),
+    updated: date.toISOString(),
   });
 
   await database.write();
@@ -40,19 +44,25 @@ async function fetch(user_id) {
   return user;
 }
 
-async function update(user_id, username, strike) {
+async function update(user_id) {
   const database = await this._database();
   await database.read();
 
   const { retail_violations } = database.data;
 
+  const user = retail_violations.find((u) => u.user_id === user_id);
+
   const users = retail_violations.filter((u) => u.user_id !== user_id);
   database.data.retail_violations = users;
 
+  const updated = new Date();
+
   database.data.retail_violations.push({
-    user_id: user_id,
-    username: username,
-    strike: strike,
+    user_id: user.user_id,
+    username: user.username,
+    strike: user.strike + 1,
+    created: user.created,
+    updated: updated.toISOString(),
   });
 
   await database.write();

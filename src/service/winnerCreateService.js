@@ -8,12 +8,7 @@ async function add(author) {
   if (!user) {
     await winnerRepository.add(author.id, author.username);
   } else {
-    await winnerRepository.update(
-      user.user_id,
-      user.username,
-      user.wins + 1,
-      user.since
-    );
+    await winnerRepository.update(user.user_id);
   }
 }
 

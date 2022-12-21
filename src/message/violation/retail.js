@@ -2,14 +2,18 @@ import config from "../../../config.json" assert { type: "json" };
 import retail_keywords from "../../utilities/retail_keywords.js";
 import guildRepository from "../../repository/guildRepository.js";
 import retailViolationService from "../../service/retailViolationService.js";
+import is_bot from "../../utilities/is_bot.js";
 
 const retail = async (client) => {
   client.on("messageCreate", async (message) => {
-    const channelId = message.channelId;
     const memeChannels = config.channels.memes;
 
-    if (Number(message.author.id) === config.bot.id) return false;
-    if ([memeChannels.retail, memeChannels.burn].includes(Number(channelId))) {
+    if (is_bot(message)) return false;
+    if (
+      [memeChannels.retail, memeChannels.roast].includes(
+        Number(message.channelId)
+      )
+    ) {
       return false;
     }
 

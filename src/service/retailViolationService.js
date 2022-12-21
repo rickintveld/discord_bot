@@ -8,11 +8,7 @@ async function add(user) {
   if (violator === null) {
     await retailViolationRepository.add(user.id, user.username, 1);
   } else {
-    await retailViolationRepository.update(
-      user.id,
-      violator.username,
-      violator.strike + 1
-    );
+    await retailViolationRepository.update(user.id);
   }
 }
 

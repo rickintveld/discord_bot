@@ -43,20 +43,22 @@ async function fetch(user_id) {
   return user;
 }
 
-async function update(user_id, username, win, date) {
+async function update(user_id) {
   const database = await this._database();
   await database.read();
 
   const { winners } = database.data;
 
+  const user = winners.find((u) => u.user_id === user_id);
+
   const users = winners.filter((u) => u.user_id !== user_id);
   database.data.winners = users;
 
   database.data.winners.push({
-    user_id: user_id,
-    username: username,
-    wins: win,
-    since: date,
+    user_id: user.user_id,
+    username: user.username,
+    wins: user.win + 1,
+    since: user.date,
   });
 
   await database.write();
