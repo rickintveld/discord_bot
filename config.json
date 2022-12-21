@@ -1,7 +1,7 @@
 {
     "token": "MTAyNjUxMTkxOTQ5NjA0MDQ2OA.Gk_aSY.MNEM-2KJVNEzE8h0cYP2FYtMyyqwGP8-rqGtWc",
-    "clientId": 1026511919496040468,
-    "guildId": 1019935604391297024,
+    "clientId": "1026511919496040468",
+    "guildId": "1019935604391297024",
     "rssFeed": "https://nfs.faireconomy.media/ff_calendar_thisweek.json",
     "cron": {
         "economic_calendar": {
@@ -31,6 +31,7 @@
         "id": 1026511919496040468
     },
     "admin": {
+        "id": "730782209509687446",
         "discriminator": 6721
     }
 }
