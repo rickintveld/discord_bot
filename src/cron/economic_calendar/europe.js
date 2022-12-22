@@ -30,12 +30,6 @@ const europe = async (client) => {
   } catch (e) {
     console.warn(e.message);
   }
-
-  try {
-    channel.send(high_impact_news(events));
-  } catch (e) {
-    console.error(e.message);
-  }
 };
 
 export default europe;

@@ -27,7 +27,7 @@ function start() {
     partials: [Partials.Channel, Partials.GuildMember],
   });
 
-  client.once(Events.ClientReady, async () => {
+  client.once(Events.ClientReady, () => {
     console.log(`${client.user.username} is online.`);
 
     const rest = new REST({ version: 10 }).setToken(config.token);
@@ -35,7 +35,11 @@ function start() {
       .put(Routes.applicationGuildCommands(config.clientId, config.guildId), {
         body: command.commands,
       })
-      .then(() => console.log("Successfully registered application commands"))
+      .then(() =>
+        console.log(
+          `Successfully registered ${command.commands.length} application commands`
+        )
+      )
       .catch(console.error);
   });
 
