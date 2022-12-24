@@ -5,7 +5,7 @@ const setupRepository = { save };
 
 async function save() {
   const body = {
-    date: new Date().toISOString,
+    date: new Date().toISOString(),
   };
 
   const headers = {

@@ -3,15 +3,6 @@
     "clientId": "1026511919496040468",
     "guildId": "1019935604391297024",
     "rssFeed": "https://nfs.faireconomy.media/ff_calendar_thisweek.json",
-    "cron": {
-        "economic_calendar": {
-            "europe": "30 8 * * 1-5",
-            "new_york": "30 13 * * 1-5"
-        },
-        "user": {
-            "without_role": "0 9 * * *"
-        }
-    },
     "channels": {
         "memes": {
             "retail": 1029677907754356766,

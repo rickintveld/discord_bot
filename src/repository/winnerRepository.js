@@ -57,8 +57,8 @@ async function update(user_id) {
   database.data.winners.push({
     user_id: user.user_id,
     username: user.username,
-    wins: user.win + 1,
-    since: user.date,
+    wins: user.wins + 1,
+    since: user.since,
   });
 
   await database.write();
