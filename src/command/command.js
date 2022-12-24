@@ -1,7 +1,10 @@
 import { Events } from "discord.js";
 import live_trading from "./poll/live_trading.js";
+import winner from "./competition/winner.js";
 
-const commands = [live_trading.data].map((command) => command.toJSON());
+const commands = [live_trading.data, winner.data].map((command) =>
+  command.toJSON()
+);
 
 const execute = async (client) => {
   client.on(Events.InteractionCreate, async (interaction) => {

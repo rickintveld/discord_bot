@@ -21,6 +21,7 @@ const data = new SlashCommandBuilder()
         { name: "sydney", value: "Sydney" }
       )
   );
+// .setDefaultMemberPermissions("0");
 
 const execute = async (client, interaction) => {
   const user = interaction.options.getUser("user", true);
