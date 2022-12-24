@@ -8,13 +8,27 @@ const data = new SlashCommandBuilder()
       .setName("user")
       .setDescription("The user which will have to do the live trading session")
       .setRequired(true)
+  )
+  .addStringOption((option) =>
+    option
+      .setName("session")
+      .setDescription("The session for the live trading")
+      .setRequired(true)
+      .addChoices(
+        { name: "london", value: "London" },
+        { name: "new_york", value: "New York" },
+        { name: "tokyo", value: "Tokyo" },
+        { name: "sydney", value: "Sydney" }
+      )
   );
 
 const execute = async (client, interaction) => {
   const user = interaction.options.getUser("user", true);
+  const session = interaction.options.getString("session", true);
+
   const message = [
     `**Which day do you want ${user.toString()} to do a live trading session for the upcoming week?**`,
-    "*New York session only; 13:00 +0 GMT*",
+    `*${session} session* 🕑`,
     " ",
     "1️⃣ Monday",
     "2️⃣ Tuesday",
@@ -22,7 +36,7 @@ const execute = async (client, interaction) => {
     "4️⃣ Thursday",
     "5️⃣ Friday",
     " ",
-    "> Respond with 1 of the letters so I can count the choices",
+    "> Respond with 1 of the letters so I can count the choices and decide when to do the live trading session.",
   ];
   const reponse = await interaction.reply({
     content: message.join("\n"),
