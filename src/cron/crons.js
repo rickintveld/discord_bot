@@ -16,4 +16,15 @@ const crons = {
   },
 };
 
-export default crons;
+const schedule = (client) => {
+  crons.economic_calender.europe(client);
+  crons.economic_calender.new_york(client);
+
+  crons.user.without_role(client);
+
+  crons.holiday.christmas(client);
+};
+
+const cron = { schedule };
+
+export default cron;

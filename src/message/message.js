@@ -5,9 +5,9 @@ import new_user from "./reaction/new_user.js";
 import setup_thread_usage from "./violation/setup_thread_usage.js";
 import retail from "./violation/retail.js";
 
-const message = {
+const messages = {
   violation: {
-    retail: retail,
+    retail,
     setup_thread_usage,
   },
   reaction: {
@@ -16,5 +16,16 @@ const message = {
     new_user,
   },
 };
+
+const monitor = (client) => {
+  messages.reaction.new_user(client);
+  messages.reaction.setup(client);
+  messages.reaction.winner(client);
+
+  messages.violation.retail(client);
+  messages.violation.setup_thread_usage(client);
+};
+
+const message = { monitor };
 
 export default message;
