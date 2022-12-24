@@ -43,14 +43,17 @@ function start() {
       .catch(console.error);
   });
 
-  cron.schedule(config.cron.economic_calendar.europe, async () => {
+  cron.schedule("30 8 * * 1-5", async () => {
     crons.economic_calender.europe(client);
   });
-  cron.schedule(config.cron.user.without_role, async () => {
+  cron.schedule("0 9 * * *", async () => {
     crons.user.without_role(client);
   });
-  cron.schedule(config.cron.economic_calendar.new_york, async () => {
+  cron.schedule("30 13 * * 1-5", async () => {
     crons.economic_calender.new_york(client);
+  });
+  cron.schedule("0 14 25 12 *", async () => {
+    crons.holiday.christmas(client);
   });
 
   binding.commands.set(client);
