@@ -4,6 +4,7 @@
     "guildId": "1019935604391297024",
     "rssFeed": "https://nfs.faireconomy.media/ff_calendar_thisweek.json",
     "channels": {
+        "announcements": "1026112078529953792",
         "memes": {
             "retail": 1029677907754356766,
             "roast": 1052902599789125662
