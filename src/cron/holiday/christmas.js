@@ -2,7 +2,7 @@ import config from "../../../config.json" assert { type: "json" };
 import cron from "node-cron";
 
 const christmas = async (client) => {
-  cron.schedule("25 10 25 12 *", async () => {
+  cron.schedule("0 10 25 12 *", async () => {
     const channel = await client.channels.fetch(config.channels.announcements);
 
     channel.send(

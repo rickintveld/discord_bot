@@ -1,25 +1,17 @@
 import config from "../../../config.json" assert { type: "json" };
-import axios from "axios";
 import message_map from "../../utilities/message.js";
 import cron from "node-cron";
+import economicCalendarRepository from "../../repository/economicCalendarRepository.js";
 
 const europe = async (client) => {
-  cron.schedule("30 8 * * 1-5", async () => {
-    const response = await axios.get(config.rssFeed);
+  cron.schedule("15 9 * * 1-5", async () => {
+    let events = null;
 
-    const events = response.data
-      .filter((event) => ["EUR", "GBP"].includes(event.country))
-      .filter((event) => {
-        const date = new Date().setHours(0, 0, 0, 0);
-        const eventDate = new Date(event.date).setHours(0, 0, 0, 0);
+    try {
+      events = await economicCalendarRepository.today(["EUR", "GBP"]);
+    } catch (e) {
+      console.log(e.message);
 
-        if (date === eventDate) {
-          return event;
-        }
-      });
-
-    if (!events) {
-      console.error("No EU / GBP news today");
       return;
     }
 
@@ -27,11 +19,7 @@ const europe = async (client) => {
       config.channels.economic_calendar
     );
 
-    try {
-      channel.send(message_map(events));
-    } catch (e) {
-      console.warn(e.message);
-    }
+    channel.send(message_map(events));
   });
 };
 
