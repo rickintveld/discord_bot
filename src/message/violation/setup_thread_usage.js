@@ -1,6 +1,6 @@
 import config from "../../../config.json" assert { type: "json" };
-import setupViolationRepository from "../../repository/setupViolationRepository.js";
-import guildRepository from "../../repository/guildRepository.js";
+import setup_violation_repository from "../../repository/setup_violation_repository.js";
+import guild_repository from "../../repository/guild_repository.js";
 import has_attachments from "../../utilities/has_attachments.js";
 import contains_url from "../../utilities/contains_url.js";
 import is_bot from "../../utilities/is_bot.js";
@@ -22,7 +22,7 @@ const setup_thread_usage = async (client) => {
 
     console.log(`Adding ${username} to the setup_thread_usage violators`);
 
-    const user = await setupViolationRepository.fetch(user_id);
+    const user = await setup_violation_repository.fetch(user_id);
     let strike = user?.strike ?? 0;
 
     let replyMessage =
@@ -32,10 +32,10 @@ const setup_thread_usage = async (client) => {
       case 1:
         replyMessage =
           "Please use threads for discussion or questions about setups :angry:";
-        await setupViolationRepository.update(user_id);
+        await setup_violation_repository.update(user_id);
         break;
       default:
-        await setupViolationRepository.add(user_id, username, 1);
+        await setup_violation_repository.add(user_id, username, 1);
     }
 
     if (strike > 2) {
@@ -46,7 +46,7 @@ const setup_thread_usage = async (client) => {
       await message.reply(
         `${username} received a 10 seconde timeout for not using threads!`
       );
-      await guildRepository.timeout(member, "Timeout for not using threads");
+      await guild_repository.timeout(member, "Timeout for not using threads");
     } else {
       await message.reply(replyMessage);
     }

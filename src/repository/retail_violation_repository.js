@@ -3,26 +3,18 @@ import { fileURLToPath } from "url";
 import { Low } from "lowdb";
 import { JSONFile } from "lowdb-node";
 
-const winnerRepository = {
-  add,
-  remove,
-  fetch,
-  update,
-  _createTable,
-  _database,
-};
-
-async function add(user_id, username) {
+async function add(user_id, username, strike) {
   const database = await this._database();
   await database.read();
 
   const date = new Date();
 
-  database.data.winners.push({
+  database.data.retail_violations.push({
     user_id: user_id,
     username: username,
-    wins: 1,
-    since: date.toISOString(),
+    strike: strike,
+    created: date.toISOString(),
+    updated: date.toISOString(),
   });
 
   await database.write();
@@ -32,13 +24,13 @@ async function fetch(user_id) {
   const database = await this._database();
   await database.read();
 
-  const { winners } = database.data;
+  const { retail_violations } = database.data;
 
-  if (winners.length === 0) {
+  if (retail_violations.length === 0) {
     return null;
   }
 
-  const user = winners.find((s) => s.user_id === user_id);
+  const user = retail_violations.find((s) => s.user_id === user_id);
 
   return user;
 }
@@ -47,18 +39,21 @@ async function update(user_id) {
   const database = await this._database();
   await database.read();
 
-  const { winners } = database.data;
+  const { retail_violations } = database.data;
 
-  const user = winners.find((u) => u.user_id === user_id);
+  const user = retail_violations.find((u) => u.user_id === user_id);
 
-  const users = winners.filter((u) => u.user_id !== user_id);
-  database.data.winners = users;
+  const users = retail_violations.filter((u) => u.user_id !== user_id);
+  database.data.retail_violations = users;
 
-  database.data.winners.push({
+  const updated = new Date();
+
+  database.data.retail_violations.push({
     user_id: user.user_id,
     username: user.username,
-    wins: user.wins + 1,
-    since: user.since,
+    strike: user.strike + 1,
+    created: user.created,
+    updated: updated.toISOString(),
   });
 
   await database.write();
@@ -68,10 +63,10 @@ async function remove(user_id) {
   const database = await this._database();
   await database.read();
 
-  const { winners } = database.data;
+  const { retail_violations } = database.data;
 
-  const users = winners.filter((u) => u.user_id !== user_id);
-  database.data.winners = users;
+  const users = retail_violations.filter((u) => u.user_id !== user_id);
+  database.data.retail_violations = users;
 
   await database.write();
 }
@@ -91,13 +86,22 @@ async function _database() {
 async function _createTable(database) {
   await database.read();
 
-  if (database.data?.winners) {
+  if (database.data?.retail_violations) {
     return;
   }
 
-  database.data ||= { winners: [] };
+  database.data ||= { retail_violations: [] };
 
   await database.write();
 }
 
-export default winnerRepository;
+const retail_violation_repository = {
+  add,
+  remove,
+  fetch,
+  update,
+  _createTable,
+  _database,
+};
+
+export default retail_violation_repository;

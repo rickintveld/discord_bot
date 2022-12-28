@@ -1,5 +1,5 @@
 import config from "../../../config.json" assert { type: "json" };
-import winnerCreateService from "../../service/winnerCreateService.js";
+import winner_create_service from "../../service/winner_create_service.js";
 import has_attachments from "../../utilities/has_attachments.js";
 import contains_url from "../../utilities/contains_url.js";
 import { Events, MessageType } from "discord.js";
@@ -12,7 +12,7 @@ const winner = async (client) => {
     if (is_message_type_allowed(message)) return false;
 
     if (has_attachments(message) || contains_url(message)) {
-      winnerCreateService.add(message.author);
+      winner_create_service.add(message.author);
       message.react("🔥");
       message.react("🥂");
       message.react("🤑");

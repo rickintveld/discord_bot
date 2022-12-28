@@ -1,8 +1,6 @@
 import config from "../../../config.json" assert { type: "json" };
 import axios from "axios";
 
-const setupRepository = { save };
-
 async function save() {
   const body = {
     date: new Date().toISOString(),
@@ -27,4 +25,6 @@ async function save() {
   }
 }
 
-export default setupRepository;
+const setup_repository = { save };
+
+export default setup_repository;

@@ -4,9 +4,6 @@ const prices = [
   { name: "5k", value: "5k challenge" },
   { name: "10k", value: "10k challenge" },
   { name: "20k", value: "20k challenge" },
-  // { name: "50k", value: "50k challenge" },
-  // { name: "100k", value: "100k challenge" },
-  // { name: "200k", value: "200k challenge" },
 ];
 
 const data = new SlashCommandBuilder()
@@ -52,8 +49,8 @@ const execute = async (client, interaction) => {
   const message = [
     "**Congratulations to the winners of the trading competition** 🥂",
     " ",
-    `1st place: ${winner.toString()} - ${winner_price} 🤑`,
-    `2nd place: ${runner_up.toString()} - ${runner_up_price} 🤑`,
+    `🥇 1st place: ${winner.toString()} - ${winner_price}`,
+    `🥈 2nd place: ${runner_up.toString()} - ${runner_up_price}`,
     " ",
     "> Contact me through a DM so we can arrange the payment for the challenge 💰",
   ];

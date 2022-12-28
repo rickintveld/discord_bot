@@ -3,15 +3,6 @@ import { fileURLToPath } from "url";
 import { Low } from "lowdb";
 import { JSONFile } from "lowdb-node";
 
-const setupViolationRepository = {
-  add,
-  remove,
-  fetch,
-  update,
-  _createTable,
-  _database,
-};
-
 async function add(user_id, username, strike) {
   const database = await this._database();
   await database.read();
@@ -104,4 +95,13 @@ async function _createTable(database) {
   await database.write();
 }
 
-export default setupViolationRepository;
+const setup_violation_repository = {
+  add,
+  remove,
+  fetch,
+  update,
+  _createTable,
+  _database,
+};
+
+export default setup_violation_repository;

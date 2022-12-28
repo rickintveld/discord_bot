@@ -1,6 +1,6 @@
 import config from "../../../config.json" assert { type: "json" };
 import { dateCompare } from "../../utilities/date_compare.js";
-import guildRepository from "../../repository/guildRepository.js";
+import guild_repository from "../../repository/guild_repository.js";
 import cron from "node-cron";
 
 const without_role = async (client) => {
@@ -20,7 +20,7 @@ const without_role = async (client) => {
       channel.send(
         `User ${member.user.username} is kicked from the group for inactivity :wave:`
       );
-      guildRepository.kick(guild, member.user.id);
+      guild_repository.kick(guild, member.user.id);
     });
   });
 };

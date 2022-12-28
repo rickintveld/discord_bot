@@ -11,9 +11,9 @@ const timeout = async (member, reason) => {
   await member.timeout(10 * 1000, reason);
 };
 
-const guildRepository = {
+const guild_repository = {
   kick,
   timeout,
 };
 
-export default guildRepository;
+export default guild_repository;

@@ -25,8 +25,8 @@ const today = async (countries) => {
   return events;
 };
 
-const economicCalendarRepository = {
+const economic_calendar_repository = {
   today,
 };
 
-export default economicCalendarRepository;
+export default economic_calendar_repository;

@@ -1,7 +1,7 @@
 import config from "../../../config.json" assert { type: "json" };
 import retail_keywords from "../../utilities/retail_keywords.js";
-import guildRepository from "../../repository/guildRepository.js";
-import retailViolationService from "../../service/retailViolationService.js";
+import guild_repository from "../../repository/guild_repository.js";
+import retail_violation_service from "../../service/retail_violation_service.js";
 import is_bot from "../../utilities/is_bot.js";
 import is_admin from "../../utilities/is_admin.js";
 import { Events } from "discord.js";
@@ -35,9 +35,9 @@ const retail = async (client) => {
 
       try {
         if (!is_admin(member)) {
-          await guildRepository.timeout(member, "No retail bs allowed");
+          await guild_repository.timeout(member, "No retail bs allowed");
         }
-        await retailViolationService.add(member.user);
+        await retail_violation_service.add(member.user);
       } catch (error) {
         console.log(error);
       }
