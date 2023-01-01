@@ -4,6 +4,8 @@ import competition_winner from "./competition/competition_winner.js";
 import winners_score from "../command/score_board/winners_score.js";
 import violation_score from "../command/score_board/violation_score.js";
 import threads_score from "./score_board/threads_score.js";
+import next_phase from "./journey/next_phase.js";
+import set_phase from "./journey/set_phase.js";
 
 const commands = [
   live_trading.data,
@@ -11,6 +13,8 @@ const commands = [
   winners_score.data,
   violation_score.data,
   threads_score.data,
+  next_phase.data,
+  set_phase.data,
 ].map((command) => command.toJSON());
 
 const execute = async (client) => {
