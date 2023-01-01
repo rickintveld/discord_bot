@@ -1,10 +1,17 @@
 import { Events } from "discord.js";
 import live_trading from "./poll/live_trading.js";
-import winner from "./competition/winner.js";
+import competition_winner from "./competition/competition_winner.js";
+import winners_score from "../command/score_board/winners_score.js";
+import violation_score from "../command/score_board/violation_score.js";
+import threads_score from "./score_board/threads_score.js";
 
-const commands = [live_trading.data, winner.data].map((command) =>
-  command.toJSON()
-);
+const commands = [
+  live_trading.data,
+  competition_winner.data,
+  winners_score.data,
+  violation_score.data,
+  threads_score.data,
+].map((command) => command.toJSON());
 
 const execute = async (client) => {
   client.on(Events.InteractionCreate, async (interaction) => {

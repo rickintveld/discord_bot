@@ -35,6 +35,19 @@ async function fetch(user_id) {
   return user;
 }
 
+async function fetchAll() {
+  const database = await this._database();
+  await database.read();
+
+  const { retail_violations } = database.data;
+
+  if (retail_violations.length === 0) {
+    return null;
+  }
+
+  return retail_violations;
+}
+
 async function update(user_id) {
   const database = await this._database();
   await database.read();
@@ -71,6 +84,15 @@ async function remove(user_id) {
   await database.write();
 }
 
+async function clearTable() {
+  const database = await this._database();
+  await database.read();
+
+  database.data.retail_violations = [];
+
+  await database.write();
+}
+
 async function _database() {
   const __dirname = path.dirname(fileURLToPath(import.meta.url));
   const file = path.join(__dirname, "db.json");
@@ -99,7 +121,9 @@ const retail_violation_repository = {
   add,
   remove,
   fetch,
+  fetchAll,
   update,
+  clearTable,
   _createTable,
   _database,
 };

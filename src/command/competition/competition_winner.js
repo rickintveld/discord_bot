@@ -58,6 +58,6 @@ const execute = async (client, interaction) => {
   interaction.reply(message.join("\n"));
 };
 
-const live_trading = { data, execute };
+const competition_winner = { data, execute };
 
-export default live_trading;
+export default competition_winner;
