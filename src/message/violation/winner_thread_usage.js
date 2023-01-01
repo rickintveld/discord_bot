@@ -8,7 +8,7 @@ import is_admin from "../../utilities/is_admin.js";
 
 import { Events, MessageType } from "discord.js";
 
-const setup_thread_usage = async (client) => {
+const winner_thread_usage = async (client) => {
   client.on(Events.MessageCreate, async (message) => {
     if (is_channel_allowed(message)) return false;
     if (is_bot(message)) return false;
@@ -26,12 +26,12 @@ const setup_thread_usage = async (client) => {
     let strike = user?.strike ?? 0;
 
     let replyMessage =
-      "Please use threads for discussion or questions about setups :innocent:";
+      "Please use threads for discussion or questions about the winners :innocent:";
 
     switch (strike) {
       case 1:
         replyMessage =
-          "Please use threads for discussion or questions about setups :angry:";
+          "Please use threads for discussion or questions about the winners :angry:";
         await thread_violation_repository.update(user_id);
         break;
       default:
@@ -54,7 +54,7 @@ const setup_thread_usage = async (client) => {
 };
 
 const is_channel_allowed = (message) => {
-  return Number(message.channelId) !== config.channels.setups;
+  return Number(message.channelId) !== config.channels.winners;
 };
 
 const is_message_type_allowed = (message) => {
@@ -63,4 +63,4 @@ const is_message_type_allowed = (message) => {
   );
 };
 
-export default setup_thread_usage;
+export default winner_thread_usage;

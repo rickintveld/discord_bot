@@ -23,7 +23,7 @@ const client = () => {
     partials: [Partials.Channel, Partials.GuildMember],
   });
 
-  client.once(Events.ClientReady, () => {
+  client.once(Events.ClientReady, async () => {
     console.log(`${client.user.username} is online.`);
 
     const rest = new REST({ version: 10 }).setToken(config.token);
