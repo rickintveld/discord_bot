@@ -16,7 +16,7 @@ const execute = async (client, interaction) => {
   const send_in_violations = await retail_violation_repository.fetchAll();
 
   if (!send_in_violations) {
-    interaction.reply(`No winning setups shared yet for ${month}`);
+    interaction.reply(`No retail violations yet for ${month}`);
 
     return;
   }
