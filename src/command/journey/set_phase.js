@@ -26,16 +26,14 @@ const execute = async (client, interaction) => {
   const guild = await client.guilds.fetch(config.guildId);
   const member = await guild.members.fetch(user.id);
 
-  if (member._roles > 0) {
-    interaction.reply(`${user.toString()} already has a role`);
-
-    return;
-  }
+  member._roles.forEach((role) => {
+    member.roles.remove(role);
+  });
 
   member.roles.add(role);
 
   interaction.reply(
-    `${user.toString()} moved up to journey phase ${role.toString()} 🔥`
+    `${user.toString()} is set to journey phase ${role.toString()} 🔥`
   );
 };
 
