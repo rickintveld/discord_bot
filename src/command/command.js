@@ -4,8 +4,11 @@ import competition_winner from "./competition/competition_winner.js";
 import winners_score from "../command/score_board/winners_score.js";
 import violation_score from "../command/score_board/violation_score.js";
 import threads_score from "./score_board/threads_score.js";
-import next_phase from "./journey/next_phase.js";
-import set_phase from "./journey/set_phase.js";
+import next_stage from "./journey/next_stage.js";
+import set_stage from "./journey/set_stage.js";
+import inactive_members from "./lurker/inactive_members.js";
+import remove_inactive_member from "./lurker/remove_inactive_member.js";
+import add_inactive_member from "./lurker/add_inactive_member.js";
 
 const commands = [
   live_trading.data,
@@ -13,8 +16,11 @@ const commands = [
   winners_score.data,
   violation_score.data,
   threads_score.data,
-  next_phase.data,
-  set_phase.data,
+  next_stage.data,
+  set_stage.data,
+  inactive_members.data,
+  remove_inactive_member.data,
+  add_inactive_member.data,
 ].map((command) => command.toJSON());
 
 const execute = async (client) => {

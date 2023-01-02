@@ -3,7 +3,7 @@ import config from "../../../config.json" assert { type: "json" };
 import role_mapping from "../../utilities/role_mapping.js";
 
 const data = new SlashCommandBuilder()
-  .setName("next_journey_phase")
+  .setName("next_journey_stage")
   .setDescription("Automatically upgrades the member to the next journey stage")
   .addUserOption((option) =>
     option
@@ -36,6 +36,6 @@ const execute = async (client, interaction) => {
   }
 };
 
-const next_phase = { data, execute };
+const next_stage = { data, execute };
 
-export default next_phase;
+export default next_stage;

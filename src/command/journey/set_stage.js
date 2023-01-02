@@ -1,9 +1,8 @@
 import { SlashCommandBuilder } from "discord.js";
 import config from "../../../config.json" assert { type: "json" };
-import role_mapping from "../../utilities/role_mapping.js";
 
 const data = new SlashCommandBuilder()
-  .setName("set_journey_phase")
+  .setName("set_journey_stage")
   .setDescription("Set the journey phase role to the given user")
   .addUserOption((option) =>
     option
@@ -37,6 +36,6 @@ const execute = async (client, interaction) => {
   );
 };
 
-const set_phase = { data, execute };
+const set_stage = { data, execute };
 
-export default set_phase;
+export default set_stage;

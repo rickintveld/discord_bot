@@ -11,9 +11,16 @@ const timeout = async (member, reason) => {
   await member.timeout(10 * 1000, reason);
 };
 
+const revoke_roles = (member) => {
+  for (roles of member._roles) {
+    member.roles.remove(role);
+  }
+};
+
 const guild_repository = {
   kick,
   timeout,
+  revoke_roles,
 };
 
 export default guild_repository;

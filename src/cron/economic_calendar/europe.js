@@ -4,13 +4,14 @@ import cron from "node-cron";
 import economic_calendar_repository from "../../repository/economic_calendar_repository.js";
 
 const europe = async (client) => {
-  cron.schedule("15 9 * * 1-5", async () => {
+  cron.schedule("30 8 * * 1-5", async () => {
+    const countries = ["EUR", "GBP"];
     let events = null;
 
     try {
-      events = await economic_calendar_repository.today(["EUR", "GBP"]);
+      events = await economic_calendar_repository.today(countries);
     } catch (e) {
-      console.log(e.message);
+      console.error(e.message);
 
       return;
     }

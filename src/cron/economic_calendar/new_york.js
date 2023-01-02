@@ -11,7 +11,8 @@ const new_york = async (client) => {
     try {
       events = await economic_calendar_repository.today(["USD", "CAD"]);
     } catch (e) {
-      console.log(e.message);
+      console.error(e.message);
+
       return;
     }
 

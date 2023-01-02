@@ -2,9 +2,10 @@ import axios from "axios";
 import config from "../../config.json" assert { type: "json" };
 
 const today = async (countries) => {
-  if (Array.isArray(countries)) {
+  if (!Array.isArray(countries)) {
     throw new Error("Countries should be an array");
   }
+
   const response = await axios.get(config.rssFeed);
 
   const events = response.data

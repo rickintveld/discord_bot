@@ -4,8 +4,11 @@ import competition_winner from "../../command/competition/competition_winner.js"
 import winners_score from "../../command/score_board/winners_score.js";
 import violation_score from "../../command/score_board/violation_score.js";
 import threads_score from "../../command/score_board/threads_score.js";
-import next_phase from "../../command/journey/next_phase.js";
-import set_phase from "../../command/journey/set_phase.js";
+import next_stage from "../../command/journey/next_stage.js";
+import set_stage from "../../command/journey/set_stage.js";
+import inactive_members from "../../command/lurker/inactive_members.js";
+import remove_inactive_member from "../../command/lurker/remove_inactive_member.js";
+import add_inactive_member from "../../command/lurker/add_inactive_member.js";
 
 const set = (client) => {
   client.commands = new Collection();
@@ -15,8 +18,11 @@ const set = (client) => {
   client.commands.set(winners_score.data.name, winners_score);
   client.commands.set(violation_score.data.name, violation_score);
   client.commands.set(threads_score.data.name, threads_score);
-  client.commands.set(next_phase.data.name, next_phase);
-  client.commands.set(set_phase.data.name, set_phase);
+  client.commands.set(next_stage.data.name, next_stage);
+  client.commands.set(set_stage.data.name, set_stage);
+  client.commands.set(inactive_members.data.name, inactive_members);
+  client.commands.set(remove_inactive_member.data.name, remove_inactive_member);
+  client.commands.set(add_inactive_member.data.name, add_inactive_member);
 };
 
 export default set;
