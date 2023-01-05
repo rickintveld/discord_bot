@@ -1,6 +1,7 @@
 import config from "../../../config.json" assert { type: "json" };
 import { dateCompare } from "../../utilities/date_compare.js";
 import guild_repository from "../../repository/guild_repository.js";
+import lurker_repository from "../../repository/lurker_repository.js";
 import cron from "node-cron";
 
 const without_role = async (client) => {
@@ -18,9 +19,10 @@ const without_role = async (client) => {
 
     membersWithoutRoles.each((member) => {
       channel.send(
-        `User ${member.user.username} is kicked from the group for inactivity :wave:`
+        `Member ${member.user.username} is kicked from the group for inactivity :wave:`
       );
       guild_repository.kick(guild, member.user.id);
+      lurker_repository.remove(member.user.id);
     });
   });
 };

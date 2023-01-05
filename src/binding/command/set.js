@@ -9,6 +9,7 @@ import set_stage from "../../command/journey/set_stage.js";
 import inactive_members from "../../command/lurker/inactive_members.js";
 import remove_inactive_member from "../../command/lurker/remove_inactive_member.js";
 import add_inactive_member from "../../command/lurker/add_inactive_member.js";
+import meme_generator from "../../command/meme/meme_generator.js";
 
 const set = (client) => {
   client.commands = new Collection();
@@ -23,6 +24,7 @@ const set = (client) => {
   client.commands.set(inactive_members.data.name, inactive_members);
   client.commands.set(remove_inactive_member.data.name, remove_inactive_member);
   client.commands.set(add_inactive_member.data.name, add_inactive_member);
+  client.commands.set(meme_generator.data.name, meme_generator);
 };
 
 export default set;

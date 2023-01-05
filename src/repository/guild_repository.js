@@ -12,7 +12,7 @@ const timeout = async (member, reason) => {
 };
 
 const revoke_roles = (member) => {
-  for (roles of member._roles) {
+  for (const role of member._roles) {
     member.roles.remove(role);
   }
 };

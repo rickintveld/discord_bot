@@ -2,15 +2,13 @@ import setup from "./reaction/setup.js";
 import winner from "./reaction/winner.js";
 import new_user from "./reaction/new_user.js";
 
-import setup_thread_usage from "./violation/setup_thread_usage.js";
-import winner_thread_usage from "./violation/winner_thread_usage.js";
+import thread_usage from "./violation/thread_usage.js";
 import retail from "./violation/retail.js";
 
 const messages = {
   violation: {
     retail,
-    setup_thread_usage,
-    winner_thread_usage,
+    thread_usage,
   },
   reaction: {
     setup,
@@ -25,8 +23,7 @@ const monitor = (client) => {
   messages.reaction.winner(client);
 
   messages.violation.retail(client);
-  messages.violation.setup_thread_usage(client);
-  messages.violation.winner_thread_usage(client);
+  messages.violation.thread_usage(client);
 };
 
 const message = { monitor };

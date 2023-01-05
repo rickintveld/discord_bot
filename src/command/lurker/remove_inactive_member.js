@@ -19,7 +19,9 @@ const execute = async (client, interaction) => {
 
   await lurker_repository.remove(user.id);
 
-  interaction.reply(`Removed ${user.toString()} as a inactive member`);
+  interaction.reply(
+    `Removed ${user.toString()} from the list of inactive members`
+  );
 };
 
 const remove_inactive_member = { data, execute };

@@ -9,6 +9,7 @@ import set_stage from "./journey/set_stage.js";
 import inactive_members from "./lurker/inactive_members.js";
 import remove_inactive_member from "./lurker/remove_inactive_member.js";
 import add_inactive_member from "./lurker/add_inactive_member.js";
+import meme_generator from "./meme/meme_generator.js";
 
 const commands = [
   live_trading.data,
@@ -21,6 +22,7 @@ const commands = [
   inactive_members.data,
   remove_inactive_member.data,
   add_inactive_member.data,
+  meme_generator.data,
 ].map((command) => command.toJSON());
 
 const execute = async (client) => {
