@@ -9,6 +9,8 @@ async function add(user_id, username, strike) {
 
   const date = new Date();
 
+  console.log(`Adding ${username} to the thread violator DB`);
+
   database.data.thread_violations.push({
     user_id: user_id,
     username: username,
@@ -52,6 +54,8 @@ async function update(user_id) {
   const database = await this._database();
   await database.read();
 
+  console.log(`Adding new thread violation for ${user_id}`);
+
   const { thread_violations } = database.data;
 
   const user = thread_violations.find((u) => u.user_id === user_id);
@@ -75,6 +79,8 @@ async function update(user_id) {
 async function remove(user_id) {
   const database = await this._database();
   await database.read();
+
+  console.log(`Removing ${user_id} from the thread violators DB`);
 
   const { thread_violations } = database.data;
 

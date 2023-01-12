@@ -32,6 +32,10 @@ const thread_usage = async (client) => {
         replyMessage = "Please use threads :angry:";
         await thread_violation_repository.update(user_id);
         break;
+      case 2:
+        replyMessage = "Please use threads :rage:";
+        await thread_violation_repository.update(user_id);
+        break;
       default:
         await thread_violation_repository.add(user_id, username, 1);
     }
@@ -52,7 +56,7 @@ const thread_usage = async (client) => {
 };
 
 const is_channel_allowed = (message) => {
-  return [
+  return ![
     config.channels.setups,
     config.channels.winners,
     config.channels.market_outlook,

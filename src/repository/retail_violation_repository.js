@@ -9,6 +9,8 @@ async function add(user_id, username, strike) {
 
   const date = new Date();
 
+  console.log(`Adding ${username} to the violators DB`);
+
   database.data.retail_violations.push({
     user_id: user_id,
     username: username,
@@ -52,6 +54,8 @@ async function update(user_id) {
   const database = await this._database();
   await database.read();
 
+  console.log(`Adding a new violation for ${user_id}`);
+
   const { retail_violations } = database.data;
 
   const user = retail_violations.find((u) => u.user_id === user_id);
@@ -75,6 +79,8 @@ async function update(user_id) {
 async function remove(user_id) {
   const database = await this._database();
   await database.read();
+
+  console.log(`Removing ${user_id} from the violators DB`);
 
   const { retail_violations } = database.data;
 

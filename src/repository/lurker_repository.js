@@ -7,6 +7,8 @@ async function add(user_id, messages) {
   const database = await this._database();
   await database.read();
 
+  console.log(`Adding user ${user_id} to the lurker DB`);
+
   database.data.lurkers.push({
     user_id: user_id,
     messages: messages,
@@ -31,6 +33,8 @@ async function fetchAll() {
 async function remove(user_id) {
   const database = await this._database();
   await database.read();
+
+  console.log(`Removing user ${user_id} to the lurker DB`);
 
   const { lurkers } = database.data;
 

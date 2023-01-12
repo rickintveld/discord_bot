@@ -9,6 +9,8 @@ async function add(user_id, username) {
 
   const date = new Date();
 
+  console.log(`Adding a new winner for ${username}`);
+
   database.data.winners.push({
     user_id: user_id,
     username: username,
@@ -51,6 +53,8 @@ async function update(user_id) {
   const database = await this._database();
   await database.read();
 
+  console.log(`Updating a new winner for ${user_id}`);
+
   const { winners } = database.data;
 
   const user = winners.find((u) => u.user_id === user_id);
@@ -71,6 +75,8 @@ async function update(user_id) {
 async function remove(user_id) {
   const database = await this._database();
   await database.read();
+
+  console.log(`Removing the winners for ${user_id}`);
 
   const { winners } = database.data;
 
