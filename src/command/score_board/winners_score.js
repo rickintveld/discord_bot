@@ -13,9 +13,9 @@ const execute = async (client, interaction) => {
   const date = new Date();
   const month = date.getMonth() + 1 + "-" + date.getFullYear();
 
-  const send_in_winners = await winner_repository.fetchAll();
+  const all_winners = await winner_repository.fetchAll();
 
-  if (!send_in_winners) {
+  if (!all_winners) {
     interaction.reply(`No winning setups shared yet for ${month}`);
 
     return;
@@ -23,7 +23,7 @@ const execute = async (client, interaction) => {
 
   const guild = await client.guilds.fetch(config.guildId);
 
-  const winners = send_in_winners.sort((a, b) => a.wins - b.wins).reverse();
+  const winners = all_winners.sort((a, b) => a.wins - b.wins).reverse();
 
   const message = [`**Trade winners leaderboard for ${month}**`, " "];
 

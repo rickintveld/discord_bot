@@ -13,9 +13,9 @@ const execute = async (client, interaction) => {
   const date = new Date();
   const month = date.getMonth() + 1 + "-" + date.getFullYear();
 
-  const send_in_violations = await retail_violation_repository.fetchAll();
+  const all_violations = await retail_violation_repository.fetchAll();
 
-  if (!send_in_violations) {
+  if (!all_violations) {
     interaction.reply(`No retail violations yet for ${month}`);
 
     return;
@@ -23,7 +23,7 @@ const execute = async (client, interaction) => {
 
   const guild = await client.guilds.fetch(config.guildId);
 
-  const violations = send_in_violations
+  const violations = all_violations
     .sort((a, b) => a.strike - b.strike)
     .reverse();
 
@@ -31,7 +31,7 @@ const execute = async (client, interaction) => {
 
   for (let index = 0; index < 3; index++) {
     const violation = violations[index];
-    const member = await guild.members.fetch(winner.user_id);
+    const member = await guild.members.fetch(violation.user_id);
 
     message.push(
       `${icon(index)} ${member.toString()} ${violation.strike} violations`

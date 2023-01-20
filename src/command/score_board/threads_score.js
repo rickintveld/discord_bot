@@ -13,9 +13,9 @@ const execute = async (client, interaction) => {
   const date = new Date();
   const month = date.getMonth() + 1 + "-" + date.getFullYear();
 
-  const send_in_violations = await thread_violation_repository.fetchAll();
+  const all_violations = await thread_violation_repository.fetchAll();
 
-  if (!send_in_violations) {
+  if (!all_violations) {
     interaction.reply(`No winning setups shared yet for ${month}`);
 
     return;
@@ -23,8 +23,8 @@ const execute = async (client, interaction) => {
 
   const guild = await client.guilds.fetch(config.guildId);
 
-  const violations = send_in_violations
-    .sort((a, b) => a.wins - b.wins)
+  const violations = all_violations
+    .sort((a, b) => a.strike - b.strike)
     .reverse();
 
   const message = [
@@ -33,11 +33,11 @@ const execute = async (client, interaction) => {
   ];
 
   for (let index = 0; index < 3; index++) {
-    const winner = violations[index];
-    const member = await guild.members.fetch(winner.user_id);
+    const violation = violations[index];
+    const member = await guild.members.fetch(violation.user_id);
 
     message.push(
-      `${icon(index)} ${member.toString()} ${winner.wins} violations`
+      `${icon(index)} ${member.toString()} ${violation.strike} violations`
     );
   }
 

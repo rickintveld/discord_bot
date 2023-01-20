@@ -15,7 +15,6 @@
         "lowdb": "^5.0.5",
         "lowdb-node": "^3.0.2",
         "node-cron": "^3.0.2",
-        "nodemon": "^2.0.20",
-        "text-from-image": "^1.1.1"
+        "nodemon": "^2.0.20"
     }
 }
