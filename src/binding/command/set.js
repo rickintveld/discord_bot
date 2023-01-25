@@ -11,6 +11,7 @@ import remove_inactive_member from "../../command/lurker/remove_inactive_member.
 import add_inactive_member from "../../command/lurker/add_inactive_member.js";
 import meme_generator from "../../command/meme/meme_generator.js";
 import webinar from "../../command/webinar/webinar.js";
+import passed_challenge from "../../command/funded/passed_challenge.js";
 
 const set = (client) => {
   client.commands = new Collection();
@@ -27,6 +28,7 @@ const set = (client) => {
   client.commands.set(add_inactive_member.data.name, add_inactive_member);
   client.commands.set(meme_generator.data.name, meme_generator);
   client.commands.set(webinar.data.name, webinar);
+  client.commands.set(passed_challenge.data.name, passed_challenge);
 };
 
 export default set;

@@ -11,6 +11,7 @@ import remove_inactive_member from "./lurker/remove_inactive_member.js";
 import add_inactive_member from "./lurker/add_inactive_member.js";
 import meme_generator from "./meme/meme_generator.js";
 import webinar from "./webinar/webinar.js";
+import passed_challenge from "./funded/passed_challenge.js";
 
 const commands = [
   live_trading.data,
@@ -25,6 +26,7 @@ const commands = [
   add_inactive_member.data,
   meme_generator.data,
   webinar.data,
+  passed_challenge.data,
 ].map((command) => command.toJSON());
 
 const execute = async (client) => {

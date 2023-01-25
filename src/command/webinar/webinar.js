@@ -16,7 +16,11 @@ const execute = async (client, interaction) => {
 
   const webinar = await webinar_repository.fetch(webinarNumber);
 
-  interaction.reply(`${webinar.url}`);
+  let response = webinar
+    ? webinar.url
+    : `Webinar ${webinarNumber} can not be found ⚠️`;
+
+  interaction.reply(response);
 };
 
 const fetch_webinar = { data, execute };
