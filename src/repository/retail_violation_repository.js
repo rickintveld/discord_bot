@@ -58,9 +58,9 @@ async function update(user_id) {
 
   const { retail_violations } = database.data;
 
-  const user = retail_violations.find((u) => u.user_id === user_id);
+  const user = retail_violations.find((u) => u.user_id == user_id);
 
-  const users = retail_violations.filter((u) => u.user_id !== user_id);
+  const users = retail_violations.filter((u) => u.user_id != user_id);
   database.data.retail_violations = users;
 
   const updated = new Date();

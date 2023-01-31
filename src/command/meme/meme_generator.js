@@ -24,6 +24,10 @@ const data = new SlashCommandBuilder()
         { name: "Chicken-Bob", value: "Chicken-Bob" },
         { name: "Computer-Guy", value: "Computer-Guy" },
         { name: "Computer-Guy-Facepalm", value: "Computer-Guy-Facepalm" },
+        {
+          name: "Captain-Phillips-Im-The-Captain-Now",
+          value: "Captain-Phillips-Im-The-Captain-Now",
+        },
         { name: "Cereal-Guy-Spitting", value: "Cereal-Guy-Spitting" },
         { name: "Dr-Evil-Laser", value: "Dr-Evil-Laser" },
         { name: "Frustrated-Boromir", value: "Frustrated-Boromir" },
