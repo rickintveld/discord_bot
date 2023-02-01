@@ -33,9 +33,15 @@ const client = () => {
       environmentConfig.DISCORD_TOKEN
     );
     rest
-      .put(Routes.applicationGuildCommands(config.clientId, config.guildId), {
-        body: command.commands,
-      })
+      .put(
+        Routes.applicationGuildCommands(
+          environmentConfig.DISCORD_CLIENT_ID,
+          config.guildId
+        ),
+        {
+          body: command.commands,
+        }
+      )
       .then(() =>
         console.log(
           `Successfully registered ${command.commands.length} application commands`
