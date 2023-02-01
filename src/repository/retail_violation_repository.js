@@ -32,7 +32,7 @@ async function fetch(user_id) {
     return null;
   }
 
-  const user = retail_violations.find((s) => s.user_id === user_id);
+  const user = retail_violations.find((s) => s.user_id == user_id);
 
   return user;
 }
@@ -84,7 +84,7 @@ async function remove(user_id) {
 
   const { retail_violations } = database.data;
 
-  const users = retail_violations.filter((u) => u.user_id !== user_id);
+  const users = retail_violations.filter((u) => u.user_id != user_id);
   database.data.retail_violations = users;
 
   await database.write();

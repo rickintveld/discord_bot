@@ -8,8 +8,11 @@ import {
 import { REST } from "@discordjs/rest";
 import config from "../../config.json" assert { type: "json" };
 import command from "../command/command.js";
+import dotenv from "dotenv";
 
 const client = () => {
+  const environmentConfig = dotenv.config().parsed;
+
   const client = new Client({
     intents: [
       GatewayIntentBits.GuildMembers,
@@ -26,7 +29,9 @@ const client = () => {
   client.once(Events.ClientReady, () => {
     console.log(`${client.user.username} is online.`);
 
-    const rest = new REST({ version: 10 }).setToken(config.token);
+    const rest = new REST({ version: 10 }).setToken(
+      environmentConfig.DISCORD_TOKEN
+    );
     rest
       .put(Routes.applicationGuildCommands(config.clientId, config.guildId), {
         body: command.commands,
