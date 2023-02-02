@@ -12,7 +12,7 @@ const without_role = async (client) => {
     const membersWithoutRoles = members
       .filter((member) => member._roles.length === 0)
       .filter(
-        (member) => dateCompare.differenceInDays(member.joinedTimestamp) > 2
+        (member) => dateCompare.differenceInDays(member.joinedTimestamp) > 1
       );
 
     const channel = await client.channels.fetch(config.channels.general);
