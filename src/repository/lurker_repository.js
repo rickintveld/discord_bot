@@ -17,6 +17,21 @@ async function add(user_id, messages) {
   await database.write();
 }
 
+async function fetch(user_id) {
+  const database = await this._database();
+  await database.read();
+
+  const { lurkers } = database.data;
+
+  if (lurkers.length === 0) {
+    return null;
+  }
+
+  const user = lurkers.find((s) => s.user_id == user_id);
+
+  return user;
+}
+
 async function fetchAll() {
   const database = await this._database();
   await database.read();
@@ -34,7 +49,7 @@ async function remove(user_id) {
   const database = await this._database();
   await database.read();
 
-  console.log(`Removing user ${user_id} to the lurker DB`);
+  console.log(`Removing user ${user_id} from the lurker DB`);
 
   const { lurkers } = database.data;
 
@@ -70,6 +85,7 @@ async function _createTable(database) {
 
 const lurker_repository = {
   add,
+  fetch,
   remove,
   fetchAll,
   _createTable,

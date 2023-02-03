@@ -1,5 +1,6 @@
 import config from "../../../config.json" assert { type: "json" };
 import { Events } from "discord.js";
+import lurker_repository from "../../repository/lurker_repository.js";
 
 const new_user = async (client) => {
   client.on(Events.GuildMemberAdd, async (member) => {
@@ -14,6 +15,8 @@ const new_user = async (client) => {
       `Welcome ${member.toString()}!`,
       `Please checkout our server rules in the ${rulesChannel.toString()} channel`,
     ];
+
+    lurker_repository.add(member.user.id, "New member");
 
     channel.send(message.join("\n"));
   });

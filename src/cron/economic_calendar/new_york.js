@@ -5,7 +5,7 @@ import cron from "node-cron";
 import economic_calendar_repository from "../../repository/economic_calendar_repository.js";
 
 const new_york = async (client) => {
-  cron.schedule("30 13 * * 1-5", async () => {
+  cron.schedule("0 13 * * 1-5", async () => {
     let events = null;
 
     try {

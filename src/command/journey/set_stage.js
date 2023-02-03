@@ -1,5 +1,6 @@
 import { SlashCommandBuilder } from "discord.js";
 import config from "../../../config.json" assert { type: "json" };
+import lurker_repository from "../../repository/lurker_repository.js";
 
 const data = new SlashCommandBuilder()
   .setName("set_journey_stage")
@@ -30,6 +31,10 @@ const execute = async (client, interaction) => {
   });
 
   member.roles.add(role);
+
+  if (lurker_repository.fetch(member.user.id)) {
+    lurker_repository.remove(member.user.id);
+  }
 
   interaction.reply(
     `${user.toString()} is set to journey phase ${role.toString()} 🔥`

@@ -5,7 +5,7 @@ import lurker_repository from "../../repository/lurker_repository.js";
 import cron from "node-cron";
 
 const without_role = async (client) => {
-  cron.schedule("0 9 * * *", async () => {
+  cron.schedule("49 10 * * *", async () => {
     const guild = await client.guilds.fetch(config.guildId);
     const members = await guild.members.fetch();
 
@@ -21,8 +21,12 @@ const without_role = async (client) => {
       channel.send(
         `Member ${member.user.username} is kicked from the group for inactivity :wave:`
       );
+
       guild_repository.kick(guild, member.user.id);
-      lurker_repository.remove(member.user.id);
+
+      if (lurker_repository.fetch(member.user.id)) {
+        lurker_repository.remove(member.user.id);
+      }
     });
   });
 };
