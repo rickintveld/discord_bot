@@ -1,4 +1,4 @@
-import { SlashCommandBuilder } from "discord.js";
+import { SlashCommandBuilder, EmbedBuilder, Colors } from "discord.js";
 import lurker_repository from "../../repository/lurker_repository.js";
 
 const data = new SlashCommandBuilder()
@@ -24,7 +24,11 @@ const execute = async (client, interaction) => {
 
   await lurker_repository.add(user.id, messages);
 
-  interaction.reply(`Added ${user.toString()} as a inactive member`);
+  const message = new EmbedBuilder()
+    .setColor(Colors.Green)
+    .setDescription(`Added ${user.toString()} as a inactive member`);
+
+  interaction.reply({ embeds: [message] });
 };
 
 const add_inactive_member = { data, execute };

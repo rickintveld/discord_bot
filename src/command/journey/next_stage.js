@@ -1,4 +1,4 @@
-import { SlashCommandBuilder } from "discord.js";
+import { SlashCommandBuilder, EmbedBuilder, Colors } from "discord.js";
 import config from "../../../config.json" assert { type: "json" };
 import role_mapping from "../../utilities/role_mapping.js";
 
@@ -26,11 +26,18 @@ const execute = async (client, interaction) => {
         member.roles.add(next_role);
         member.roles.remove(role);
 
-        interaction.reply(
-          `${user.toString()} moved up to journey phase ${next_role.toString()} 🔥`
-        );
+        const message = new EmbedBuilder()
+          .setColor(Colors.Green)
+          .setDescription(
+            `${user.toString()} moved up to journey phase ${next_role.toString()} 🔥`
+          );
+
+        interaction.reply({ embeds: [message] });
       } catch (e) {
-        interaction.reply(e.message);
+        const error_message = new EmbedBuilder()
+          .setColor(Colors.Red)
+          .setDescription(e.message);
+        interaction.reply({ embeds: [error_message] });
       }
     }
   }

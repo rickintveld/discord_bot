@@ -1,4 +1,4 @@
-import { SlashCommandBuilder } from "discord.js";
+import { SlashCommandBuilder, EmbedBuilder, Colors } from "discord.js";
 
 const data = new SlashCommandBuilder()
   .setName("passed_challenge")
@@ -14,12 +14,13 @@ const execute = async (client, interaction) => {
   const user = interaction.options.getUser("user", true);
   const propfirm = interaction.options.getString("propfirm", true);
 
-  const message = [
-    `${user.toString()} passed the ${propfirm} challenge.`,
-    "Congratulations 🥂💰",
-  ];
+  const embed = new EmbedBuilder()
+    .setColor(Colors.Green)
+    .setDescription(
+      `${user.toString()} passed the ${propfirm} challenge 🥂💰 `
+    );
 
-  interaction.reply(message.join("\n"));
+  interaction.reply({ embeds: [embed] });
 };
 
 const passed_challenge = { data, execute };

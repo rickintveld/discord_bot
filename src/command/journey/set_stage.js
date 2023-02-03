@@ -1,4 +1,4 @@
-import { SlashCommandBuilder } from "discord.js";
+import { SlashCommandBuilder, EmbedBuilder, Colors } from "discord.js";
 import config from "../../../config.json" assert { type: "json" };
 import lurker_repository from "../../repository/lurker_repository.js";
 
@@ -36,9 +36,13 @@ const execute = async (client, interaction) => {
     lurker_repository.remove(member.user.id);
   }
 
-  interaction.reply(
-    `${user.toString()} is set to journey phase ${role.toString()} 🔥`
-  );
+  const message = new EmbedBuilder()
+    .setColor(Colors.Green)
+    .setDescription(
+      `${user.toString()} is set to journey phase ${role.toString()} 🔥`
+    );
+
+  interaction.reply({ embeds: [message] });
 };
 
 const set_stage = { data, execute };

@@ -1,4 +1,4 @@
-import { SlashCommandBuilder } from "discord.js";
+import { SlashCommandBuilder, EmbedBuilder, Colors } from "discord.js";
 import lurker_repository from "../../repository/lurker_repository.js";
 
 const data = new SlashCommandBuilder()
@@ -19,9 +19,13 @@ const execute = async (client, interaction) => {
 
   await lurker_repository.remove(user.id);
 
-  interaction.reply(
-    `Removed ${user.toString()} from the list of inactive members`
-  );
+  const message = new EmbedBuilder()
+    .setColor(Colors.Green)
+    .setDescription(
+      `Removed ${user.toString()} from the list of inactive members`
+    );
+
+  interaction.reply({ embeds: [message] });
 };
 
 const remove_inactive_member = { data, execute };
