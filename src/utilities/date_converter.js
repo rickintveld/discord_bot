@@ -5,7 +5,9 @@ const date_converter = (dateTime) => {
 
   date += " +0 GMT";
 
-  return date;
+  const timestamp = Math.floor(new Date(dateTime).getTime() / 1000);
+
+  return `<t:${timestamp}:f>`;
 };
 
 export default date_converter;
