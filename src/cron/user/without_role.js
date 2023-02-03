@@ -3,6 +3,7 @@ import { dateCompare } from "../../utilities/date_compare.js";
 import guild_repository from "../../repository/guild_repository.js";
 import lurker_repository from "../../repository/lurker_repository.js";
 import cron from "node-cron";
+import { EmbedBuilder } from "discord.js";
 
 const without_role = async (client) => {
   cron.schedule("49 10 * * *", async () => {
@@ -18,9 +19,13 @@ const without_role = async (client) => {
     const channel = await client.channels.fetch(config.channels.general);
 
     membersWithoutRoles.each((member) => {
-      channel.send(
-        `Member ${member.user.username} is kicked from the group for inactivity :wave:`
-      );
+      const embed = new EmbedBuilder()
+        .setColor(0x5fb041)
+        .setDescription(
+          `Member ${member.user.username} is kicked from the group for inactivity :wave:`
+        );
+
+      channel.send({ embed: embed });
 
       guild_repository.kick(guild, member.user.id);
 
