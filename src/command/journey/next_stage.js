@@ -1,6 +1,7 @@
 import { SlashCommandBuilder, EmbedBuilder, Colors } from "discord.js";
 import config from "../../../config.json" assert { type: "json" };
 import role_mapping from "../../utilities/role_mapping.js";
+import bot_action_repository from "../../repository/bot_action_repository.js";
 
 const data = new SlashCommandBuilder()
   .setName("next_journey_stage")
@@ -26,18 +27,22 @@ const execute = async (client, interaction) => {
         member.roles.add(next_role);
         member.roles.remove(role);
 
+        const description = `${user.toString()} moved up to journey stage ${next_role.toString()}`;
+
         const message = new EmbedBuilder()
           .setColor(Colors.Green)
-          .setDescription(
-            `${user.toString()} moved up to journey phase ${next_role.toString()} 🔥`
-          );
+          .setDescription(description);
 
         interaction.reply({ embeds: [message] });
+
+        bot_action_repository.log(client, description, false);
       } catch (e) {
         const error_message = new EmbedBuilder()
           .setColor(Colors.Red)
           .setDescription(e.message);
         interaction.reply({ embeds: [error_message] });
+
+        bot_action_repository.log(client, e.message, true);
       }
     }
   }

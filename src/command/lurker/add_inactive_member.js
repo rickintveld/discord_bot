@@ -1,5 +1,6 @@
 import { SlashCommandBuilder, EmbedBuilder, Colors } from "discord.js";
 import lurker_repository from "../../repository/lurker_repository.js";
+import bot_action_repository from "../../repository/bot_action_repository.js";
 
 const data = new SlashCommandBuilder()
   .setName("add_inactive_member")
@@ -24,11 +25,15 @@ const execute = async (client, interaction) => {
 
   await lurker_repository.add(user.id, messages);
 
+  const description = `Added ${user.toString()} as a inactive member`;
+
   const message = new EmbedBuilder()
     .setColor(Colors.Green)
-    .setDescription(`Added ${user.toString()} as a inactive member`);
+    .setDescription(description);
 
   interaction.reply({ embeds: [message] });
+
+  bot_action_repository.log(client, description, false);
 };
 
 const add_inactive_member = { data, execute };

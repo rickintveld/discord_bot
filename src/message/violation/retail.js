@@ -5,6 +5,7 @@ import retail_violation_service from "../../service/retail_violation_service.js"
 import is_bot from "../../utilities/is_bot.js";
 import is_admin from "../../utilities/is_admin.js";
 import { Events } from "discord.js";
+import bot_action_repository from "../../repository/bot_action_repository.js";
 
 const retail = async (client) => {
   client.on(Events.MessageCreate, async (message) => {
@@ -37,9 +38,17 @@ const retail = async (client) => {
         if (!is_admin(member)) {
           await guild_repository.timeout(member, "No retail bs allowed");
         }
+
         await retail_violation_service.add(member.user);
+
+        bot_action_repository.log(
+          client,
+          `Added a new retail violation for ${message.author.username}`,
+          false
+        );
       } catch (error) {
         console.log(error);
+        bot_action_repository.log(client, error.message, true);
       }
     }
   });

@@ -1,5 +1,6 @@
-import { SlashCommandBuilder } from "discord.js";
+import { SlashCommandBuilder, EmbedBuilder, Colors } from "discord.js";
 import webinar_repository from "../../repository/webinar_repository.js";
+import bot_action_repository from "../../repository/bot_action_repository.js";
 
 const data = new SlashCommandBuilder()
   .setName("webinar")
@@ -16,11 +17,30 @@ const execute = async (client, interaction) => {
 
   const webinar = await webinar_repository.fetch(webinarNumber);
 
-  let response = webinar
-    ? webinar.url
-    : `Webinar ${webinarNumber} can not be found ⚠️`;
+  const embed_message = new EmbedBuilder();
 
-  interaction.reply(response);
+  if (webinar) {
+    bot_action_repository.log(
+      client,
+      `Webinar ${webinarNumber} is requested by ${interaction.user.toString()}`,
+      false
+    );
+
+    interaction.reply(webinar.url);
+
+    return;
+  }
+  const description = `Requested webinar ${webinarNumber} can not be found`;
+  embed_message.setColor(Colors.Red);
+  embed_message.setDescription(description);
+
+  bot_action_repository.log(
+    client,
+    `Unknown webinar ${webinarNumber} is requested by ${interaction.user.toString()}`,
+    true
+  );
+
+  interaction.reply({ embeds: [embed_message] });
 };
 
 const fetch_webinar = { data, execute };

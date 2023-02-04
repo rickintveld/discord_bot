@@ -1,6 +1,7 @@
 import { SlashCommandBuilder, EmbedBuilder, Colors } from "discord.js";
 import config from "../../../config.json" assert { type: "json" };
 import lurker_repository from "../../repository/lurker_repository.js";
+import bot_action_repository from "../../repository/bot_action_repository.js";
 
 const data = new SlashCommandBuilder()
   .setName("set_journey_stage")
@@ -36,13 +37,15 @@ const execute = async (client, interaction) => {
     lurker_repository.remove(member.user.id);
   }
 
+  const description = `${user.toString()} has been given journey stage role ${role.toString()}`;
+
   const message = new EmbedBuilder()
     .setColor(Colors.Green)
-    .setDescription(
-      `${user.toString()} is set to journey phase ${role.toString()} 🔥`
-    );
+    .setDescription(description);
 
   interaction.reply({ embeds: [message] });
+
+  bot_action_repository.log(client, description, false);
 };
 
 const set_stage = { data, execute };

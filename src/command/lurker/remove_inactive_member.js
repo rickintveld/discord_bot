@@ -1,5 +1,6 @@
 import { SlashCommandBuilder, EmbedBuilder, Colors } from "discord.js";
 import lurker_repository from "../../repository/lurker_repository.js";
+import bot_action_repository from "../../repository/bot_action_repository.js";
 
 const data = new SlashCommandBuilder()
   .setName("remove_inactive_member")
@@ -19,12 +20,13 @@ const execute = async (client, interaction) => {
 
   await lurker_repository.remove(user.id);
 
+  const description = `Removed ${user.toString()} from the list of inactive members`;
+
   const message = new EmbedBuilder()
     .setColor(Colors.Green)
-    .setDescription(
-      `Removed ${user.toString()} from the list of inactive members`
-    );
+    .setDescription(description);
 
+  bot_action_repository.log(client, description, false);
   interaction.reply({ embeds: [message] });
 };
 

@@ -1,6 +1,7 @@
 import config from "../../../config.json" assert { type: "json" };
 import { Events } from "discord.js";
 import lurker_repository from "../../repository/lurker_repository.js";
+import bot_action_repository from "../../repository/bot_action_repository.js";
 
 const new_user = async (client) => {
   client.on(Events.GuildMemberAdd, async (member) => {
@@ -17,6 +18,12 @@ const new_user = async (client) => {
     ];
 
     lurker_repository.add(member.user.id, "New member");
+
+    bot_action_repository.log(
+      client,
+      `New member added to the lurker database`,
+      false
+    );
 
     channel.send(message.join("\n"));
   });

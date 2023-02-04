@@ -1,5 +1,6 @@
 import { SlashCommandBuilder } from "discord.js";
 import meme_repository from "../../repository/meme_repository.js";
+import bot_action_repository from "../../repository/bot_action_repository.js";
 
 const data = new SlashCommandBuilder()
   .setName("meme")
@@ -63,6 +64,12 @@ const execute = async (client, interaction) => {
   const meme_image = meme_repository.generate(meme, top_text, bottom_text);
 
   interaction.reply(`${meme_image}`);
+
+  bot_action_repository.log(
+    client,
+    `A meme was requested by ${interaction.user.toString()}`,
+    false
+  );
 };
 
 const meme_generator = { data, execute };

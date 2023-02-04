@@ -7,6 +7,7 @@ import is_bot from "../../utilities/is_bot.js";
 import is_admin from "../../utilities/is_admin.js";
 
 import { Events, MessageType } from "discord.js";
+import bot_action_repository from "../../repository/bot_action_repository.js";
 
 const thread_usage = async (client) => {
   client.on(Events.MessageCreate, async (message) => {
@@ -52,6 +53,12 @@ const thread_usage = async (client) => {
     } else {
       await message.reply(replyMessage);
     }
+
+    bot_action_repository.log(
+      client,
+      `New no thread usage violation for ${username}`,
+      false
+    );
   });
 };
 

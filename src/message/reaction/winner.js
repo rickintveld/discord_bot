@@ -3,6 +3,7 @@ import winner_create_service from "../../service/winner_create_service.js";
 import has_attachments from "../../utilities/has_attachments.js";
 import contains_url from "../../utilities/contains_url.js";
 import { Events, MessageType } from "discord.js";
+import bot_action_repository from "../../repository/bot_action_repository.js";
 
 const winner = async (client) => {
   client.on(Events.MessageCreate, async (message) => {
@@ -13,9 +14,16 @@ const winner = async (client) => {
 
     if (has_attachments(message) || contains_url(message)) {
       winner_create_service.add(message.author);
+
       message.react("🔥");
       message.react("🥂");
       message.react("🤑");
+
+      bot_action_repository.log(
+        client,
+        `New winner added by ${message.author.username}`,
+        false
+      );
     }
   });
 };

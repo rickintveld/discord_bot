@@ -4,6 +4,7 @@ import guild_repository from "../../repository/guild_repository.js";
 import lurker_repository from "../../repository/lurker_repository.js";
 import cron from "node-cron";
 import { EmbedBuilder, Colors } from "discord.js";
+import bot_action_repository from "../../repository/bot_action_repository.js";
 
 const without_role = async (client) => {
   cron.schedule("49 10 * * *", async () => {
@@ -19,18 +20,25 @@ const without_role = async (client) => {
     const channel = await client.channels.fetch(config.channels.general);
 
     membersWithoutRoles.each((member) => {
+      const description = `Member ${member.user.username} is kicked from the group for inactivity :wave:`;
       const embed = new EmbedBuilder()
         .setColor(Colors.Red)
-        .setDescription(
-          `Member ${member.user.username} is kicked from the group for inactivity :wave:`
-        );
+        .setDescription(description);
 
       channel.send({ embeds: [embed] });
+
+      bot_action_repository.log(client, description, false);
 
       guild_repository.kick(guild, member.user.id);
 
       if (lurker_repository.fetch(member.user.id)) {
         lurker_repository.remove(member.user.id);
+
+        bot_action_repository.log(
+          client,
+          `${member.user.username} is removed from the lurker database`,
+          false
+        );
       }
     });
   });

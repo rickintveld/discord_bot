@@ -1,4 +1,4 @@
-import { Events } from "discord.js";
+import { Events, EmbedBuilder, Colors } from "discord.js";
 import live_trading from "./poll/live_trading.js";
 import competition_winner from "./competition/competition_winner.js";
 import winners_score from "../command/score_board/winners_score.js";
@@ -12,6 +12,8 @@ import add_inactive_member from "./lurker/add_inactive_member.js";
 import meme_generator from "./meme/meme_generator.js";
 import webinar from "./webinar/webinar.js";
 import passed_challenge from "./funded/passed_challenge.js";
+
+import bot_action_repository from "../repository/bot_action_repository.js";
 
 const commands = [
   live_trading.data,
@@ -40,11 +42,12 @@ const execute = async (client) => {
     try {
       await command.execute(client, interaction);
     } catch (error) {
-      console.error(error);
-      await interaction.reply({
-        content: "There was an error while executing this command!",
-        ephemeral: true,
-      });
+      const message = new EmbedBuilder()
+        .setColor(Colors.Red)
+        .setDescription(error.message);
+
+      bot_action_repository.log(client, message, true);
+      await interaction.reply({ embeds: [message] });
     }
   });
 };

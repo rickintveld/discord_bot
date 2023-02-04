@@ -1,4 +1,5 @@
 import { SlashCommandBuilder } from "discord.js";
+import bot_action_repository from "../../repository/bot_action_repository.js";
 
 const data = new SlashCommandBuilder()
   .setName("live_trading_poll")
@@ -47,6 +48,12 @@ const execute = async (client, interaction) => {
   for (const icon of icons) {
     reponse.react(icon);
   }
+
+  bot_action_repository.log(
+    client,
+    `A live trading session is requested by ${interaction.user.toString()}`,
+    false
+  );
 };
 
 const live_trading = { data, execute };

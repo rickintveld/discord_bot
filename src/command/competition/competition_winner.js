@@ -1,4 +1,5 @@
 import { SlashCommandBuilder } from "discord.js";
+import bot_action_repository from "../../repository/bot_action_repository.js";
 
 const prices = [
   { name: "5k", value: "5k challenge" },
@@ -56,6 +57,8 @@ const execute = async (client, interaction) => {
   ];
 
   interaction.reply(message.join("\n"));
+
+  bot_action_repository.log(client, "Competition winner announced", false);
 };
 
 const competition_winner = { data, execute };
