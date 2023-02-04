@@ -6,7 +6,7 @@ import contains_url from "../../utilities/contains_url.js";
 import is_bot from "../../utilities/is_bot.js";
 import is_admin from "../../utilities/is_admin.js";
 
-import { Events, MessageType } from "discord.js";
+import { Events, MessageType, EmbedBuilder, Colors } from "discord.js";
 import bot_action_repository from "../../repository/bot_action_repository.js";
 
 const thread_usage = async (client) => {
@@ -28,6 +28,8 @@ const thread_usage = async (client) => {
 
     let replyMessage = "Please use threads :innocent:";
 
+    const embed_message = new EmbedBuilder().setColor(Colors.Red);
+
     switch (strike) {
       case 1:
         replyMessage = "Please use threads :angry:";
@@ -44,14 +46,17 @@ const thread_usage = async (client) => {
     if (strike > 2) {
       const member = await message.guild.members.fetch(user_id);
 
-      if (is_admin(member)) return false;
-
-      await message.reply(
+      embed_message.setDescription(
         `${username} received a 10 seconde timeout for not using threads!`
       );
+      await message.reply({ embeds: [embed_message] });
+
+      if (is_admin(member)) return false;
+
       await guild_repository.timeout(member, "Timeout for not using threads");
     } else {
-      await message.reply(replyMessage);
+      embed_message.setDescription(replyMessage);
+      await message.reply({ embeds: [embed_message] });
     }
 
     bot_action_repository.log(

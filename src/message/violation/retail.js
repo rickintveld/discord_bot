@@ -4,7 +4,7 @@ import guild_repository from "../../repository/guild_repository.js";
 import retail_violation_service from "../../service/retail_violation_service.js";
 import is_bot from "../../utilities/is_bot.js";
 import is_admin from "../../utilities/is_admin.js";
-import { Events } from "discord.js";
+import { Events, EmbedBuilder, Colors } from "discord.js";
 import bot_action_repository from "../../repository/bot_action_repository.js";
 
 const retail = async (client) => {
@@ -28,11 +28,13 @@ const retail = async (client) => {
     if (violations.length > 0) {
       const member = await message.guild.members.fetch(message.author.id);
 
-      await message.reply(
-        `My retail sensors are tingling for using ${violations.join(
-          ", "
-        )} :face_with_monocle:`
-      );
+      const embed_message = new EmbedBuilder()
+        .setColor(Colors.Red)
+        .setDescription(
+          `My retail sensors are tingling for using ${violations.join(", ")}`
+        );
+
+      await message.reply({ embeds: [embed_message] });
 
       try {
         if (!is_admin(member)) {
