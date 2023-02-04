@@ -1,3 +1,5 @@
+import is_admin from "../utilities/is_admin.js";
+
 const kick = async (guild, userId) => {
   await guild.members
     .kick(userId)
@@ -8,6 +10,8 @@ const kick = async (guild, userId) => {
 };
 
 const timeout = async (member, reason) => {
+  if (is_admin(member)) return false;
+
   await member.timeout(10 * 1000, reason);
 };
 

@@ -51,8 +51,6 @@ const thread_usage = async (client) => {
       );
       await message.reply({ embeds: [embed_message] });
 
-      if (is_admin(member)) return false;
-
       await guild_repository.timeout(member, "Timeout for not using threads");
     } else {
       embed_message.setDescription(replyMessage);

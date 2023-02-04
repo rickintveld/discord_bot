@@ -37,9 +37,7 @@ const retail = async (client) => {
       await message.reply({ embeds: [embed_message] });
 
       try {
-        if (!is_admin(member)) {
-          await guild_repository.timeout(member, "No retail bs allowed");
-        }
+        await guild_repository.timeout(member, "No retail bs allowed");
 
         await retail_violation_service.add(member.user);
 
