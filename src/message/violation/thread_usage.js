@@ -59,7 +59,7 @@ const thread_usage = async (client) => {
 
     bot_action_repository.log(
       client,
-      `New no thread usage violation for ${username}`,
+      `New violation for not using threads by ${username}`,
       false
     );
   });
