@@ -1,8 +1,8 @@
-import config from "../../../config.json" assert { type: "json" };
-import message_map from "../../utilities/message.js";
 import cron from "node-cron";
-import economic_calendar_repository from "../../repository/economic_calendar_repository.js";
 import bot_action_repository from "../../repository/bot_action_repository.js";
+import channel_repository from "../../repository/channel_repository.js";
+import economic_calendar_repository from "../../repository/economic_calendar_repository.js";
+import message_map from "../../utilities/message.js";
 
 const europe = async (client) => {
   cron.schedule("30 8 * * 1-5", async () => {
@@ -12,15 +12,12 @@ const europe = async (client) => {
     try {
       events = await economic_calendar_repository.today(countries);
     } catch (e) {
-      console.error(e.message);
-      bot_action_repository.log(client, e.message, false);
+      bot_action_repository.log(client, e.message, true);
 
       return;
     }
 
-    const channel = await client.channels.fetch(
-      config.channels.economic_calendar
-    );
+    const channel = await channel_repository.economic_calendar(client);
 
     channel.send(message_map(events));
 

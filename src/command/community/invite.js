@@ -1,9 +1,9 @@
 import { SlashCommandBuilder, EmbedBuilder, Colors } from "discord.js";
-import config from "../../../config.json" assert { type: "json" };
 import bot_action_repository from "../../repository/bot_action_repository.js";
+import channel_repository from "../../repository/channel_repository.js";
 
 const error_message = "Something went wrong, contact the admin";
-const log_message = (user) => `${user.toString()} requested an invitation`;
+const log_message = (user) => `${user.username} requested an invitation`;
 
 const data = new SlashCommandBuilder()
   .setName("invite")
@@ -12,7 +12,7 @@ const data = new SlashCommandBuilder()
   );
 
 const execute = async (client, interaction) => {
-  const channel = await client.channels.fetch(config.channels.rules);
+  const channel = await channel_repository.rules(client);
   const invite = await channel.createInvite({
     magAge: 10 * 60 * 1000,
     maxUse: 1,

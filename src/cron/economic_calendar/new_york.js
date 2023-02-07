@@ -1,9 +1,9 @@
-import config from "../../../config.json" assert { type: "json" };
 import message_map from "../../utilities/message.js";
 import high_impact_news from "../../utilities/high_impact_news.js";
 import cron from "node-cron";
 import economic_calendar_repository from "../../repository/economic_calendar_repository.js";
 import bot_action_repository from "../../repository/bot_action_repository.js";
+import channel_repository from "../../repository/channel_repository.js";
 
 const new_york = async (client) => {
   cron.schedule("0 13 * * 1-5", async () => {
@@ -18,9 +18,7 @@ const new_york = async (client) => {
       return;
     }
 
-    const channel = await client.channels.fetch(
-      config.channels.economic_calendar
-    );
+    const channel = await channel_repository.economic_calendar(client);
 
     channel.send(message_map(events));
 

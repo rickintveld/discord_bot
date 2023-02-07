@@ -22,7 +22,7 @@ const execute = async (client, interaction) => {
   if (webinar) {
     bot_action_repository.log(
       client,
-      `Webinar ${webinarNumber} is requested by ${interaction.user.toString()}`,
+      `Webinar ${webinarNumber} is requested by ${interaction.user.username}`,
       false
     );
 
@@ -36,7 +36,7 @@ const execute = async (client, interaction) => {
 
   bot_action_repository.log(
     client,
-    `Unknown webinar ${webinarNumber} is requested by ${interaction.user.toString()}`,
+    `Unknown webinar ${webinarNumber} is requested by ${interaction.user.username}`,
     true
   );
 

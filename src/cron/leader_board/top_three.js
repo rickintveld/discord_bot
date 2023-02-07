@@ -1,10 +1,12 @@
 import config from "../../../config.json" assert { type: "json" };
 import cron from "node-cron";
 import leader_board_service from "../../service/leader_board_service.js";
+import channel_repository from "../../repository/channel_repository.js";
+import bot_action_repository from "../../repository/bot_action_repository.js";
 
 const top_three = async (client) => {
   cron.schedule("0 9 1 * *", async () => {
-    const channel = await client.channels.fetch(config.channels.general);
+    const channel = await channel_repository.general(client);
     const guild = await client.guilds.fetch(config.guildId);
 
     try {
@@ -12,7 +14,7 @@ const top_three = async (client) => {
 
       channel.send(map_winner_message(winners, guild));
     } catch (e) {
-      console.log(e);
+      bot_action_repository.log(client, e.message, false);
     }
 
     try {
@@ -21,7 +23,7 @@ const top_three = async (client) => {
 
       channel.send(map_thread_message(thread_violations, guild));
     } catch (e) {
-      console.log(e.message);
+      bot_action_repository.log(client, e.message, false);
     }
 
     try {
@@ -30,7 +32,7 @@ const top_three = async (client) => {
 
       channel.send(map_retail_message(retail_violations, guild));
     } catch (e) {
-      console.log(e.message);
+      bot_action_repository.log(client, e.message, false);
     }
 
     await leader_board_service.data.clean_up();
