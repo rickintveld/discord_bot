@@ -26,7 +26,7 @@ const europe = async (client) => {
 
     bot_action_repository.log(
       client,
-      `Posted the economic calendar for ${countries.join(" ")}`,
+      `Posted the economic calendar for ${countries.join(" & ")}`,
       false
     );
   });

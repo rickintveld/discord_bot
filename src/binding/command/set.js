@@ -12,6 +12,7 @@ import add_inactive_member from "../../command/lurker/add_inactive_member.js";
 import meme_generator from "../../command/meme/meme_generator.js";
 import webinar from "../../command/webinar/webinar.js";
 import passed_challenge from "../../command/funded/passed_challenge.js";
+import invite from "../../command/community/invite.js";
 
 const set = (client) => {
   client.commands = new Collection();
@@ -29,6 +30,7 @@ const set = (client) => {
   client.commands.set(meme_generator.data.name, meme_generator);
   client.commands.set(webinar.data.name, webinar);
   client.commands.set(passed_challenge.data.name, passed_challenge);
+  client.commands.set(invite.data.name, invite);
 };
 
 export default set;

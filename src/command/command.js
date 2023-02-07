@@ -12,6 +12,7 @@ import add_inactive_member from "./lurker/add_inactive_member.js";
 import meme_generator from "./meme/meme_generator.js";
 import webinar from "./webinar/webinar.js";
 import passed_challenge from "./funded/passed_challenge.js";
+import invite from "./community/invite.js";
 
 import bot_action_repository from "../repository/bot_action_repository.js";
 
@@ -29,6 +30,7 @@ const commands = [
   meme_generator.data,
   webinar.data,
   passed_challenge.data,
+  invite.data,
 ].map((command) => command.toJSON());
 
 const execute = async (client) => {
