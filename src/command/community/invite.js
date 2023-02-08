@@ -14,7 +14,7 @@ const data = new SlashCommandBuilder()
 const execute = async (client, interaction) => {
   const channel = await channel_repository.rules(client);
   const invite = await channel.createInvite({
-    magAge: 10 * 60 * 1000,
+    magAge: 60 * 60 * 24000,
     maxUse: 1,
   });
 
