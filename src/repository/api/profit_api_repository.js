@@ -2,22 +2,23 @@ import axios from "axios";
 import dotenv from "dotenv";
 
 const config = dotenv.config().parsed;
-const api_uri = new URL(config.PROFIT_API_URI);
+const api_uri = config.PROFIT_API_URI;
 
 const add = async (data) => {
   const date = new Date();
-  const date_format = `${date.getDay()}-${date.getMonth()}-${date.getFullYear()})`;
+  const date_format = `${date.getDay()}-${date.getMonth()}-${date.getFullYear()}`;
 
   const payload = {
+    user_id: parseInt(data.user_id),
+    profit: data.profit,
     date: date_format,
-    ...data,
   };
 
-  const response = await axios.post(`${api_uri.href}/add`, payload);
+  const request_uri = new URL("add", api_uri);
+
+  const response = await axios.post(request_uri.href, payload);
 
   const profit = response.data;
-
-  return profit;
 };
 
 const get_by_id = async (user_id) => {
