@@ -1,5 +1,5 @@
 import cron from "node-cron";
-import channel_repository from "../../repository/channel_repository.js";
+import channel_repository from "../../repository/guild/channel_repository.js";
 
 const christmas = async (client) => {
   cron.schedule("0 10 25 12 *", async () => {

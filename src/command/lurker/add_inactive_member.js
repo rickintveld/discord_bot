@@ -1,6 +1,6 @@
 import { SlashCommandBuilder, EmbedBuilder, Colors } from "discord.js";
 import lurker_repository from "../../repository/lurker_repository.js";
-import bot_action_repository from "../../repository/bot_action_repository.js";
+import bot_action_repository from "../../repository/guild/bot_action_repository.js";
 
 const data = new SlashCommandBuilder()
   .setName("add_inactive_member")

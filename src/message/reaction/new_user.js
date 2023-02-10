@@ -1,7 +1,7 @@
 import config from "../../../config.json" assert { type: "json" };
 import { Events } from "discord.js";
 import lurker_repository from "../../repository/lurker_repository.js";
-import bot_action_repository from "../../repository/bot_action_repository.js";
+import bot_action_repository from "../../repository/guild/bot_action_repository.js";
 
 const new_user = async (client) => {
   client.on(Events.GuildMemberAdd, async (member) => {

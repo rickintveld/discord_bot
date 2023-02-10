@@ -1,6 +1,6 @@
 import { SlashCommandBuilder, EmbedBuilder, Colors } from "discord.js";
 import webinar_repository from "../../repository/webinar_repository.js";
-import bot_action_repository from "../../repository/bot_action_repository.js";
+import bot_action_repository from "../../repository/guild/bot_action_repository.js";
 
 const data = new SlashCommandBuilder()
   .setName("webinar")

@@ -1,7 +1,7 @@
 import { SlashCommandBuilder, EmbedBuilder, Colors } from "discord.js";
 import config from "../../../config.json" assert { type: "json" };
 import role_mapping from "../../utilities/role_mapping.js";
-import bot_action_repository from "../../repository/bot_action_repository.js";
+import bot_action_repository from "../../repository/guild/bot_action_repository.js";
 
 const data = new SlashCommandBuilder()
   .setName("next_journey_stage")

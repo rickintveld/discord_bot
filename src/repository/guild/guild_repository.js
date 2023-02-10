@@ -1,4 +1,4 @@
-import is_admin from "../utilities/is_admin.js";
+import is_admin from "../../utilities/is_admin.js";
 
 const kick = async (guild, userId) => {
   await guild.members

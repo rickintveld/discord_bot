@@ -1,6 +1,6 @@
 import { SlashCommandBuilder } from "discord.js";
 import lurker_repository from "../../repository/lurker_repository.js";
-import guild_repository from "../../repository/guild_repository.js";
+import guild_repository from "../../repository/guild/guild_repository.js";
 import config from "../../../config.json" assert { type: "json" };
 
 const data = new SlashCommandBuilder()

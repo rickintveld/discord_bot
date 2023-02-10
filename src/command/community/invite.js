@@ -1,6 +1,6 @@
 import { SlashCommandBuilder, EmbedBuilder, Colors } from "discord.js";
-import bot_action_repository from "../../repository/bot_action_repository.js";
-import channel_repository from "../../repository/channel_repository.js";
+import bot_action_repository from "../../repository/guild/bot_action_repository.js";
+import channel_repository from "../../repository/guild/channel_repository.js";
 
 const error_message = "Something went wrong, contact the admin";
 const log_message = (user) => `${user.username} requested an invitation`;

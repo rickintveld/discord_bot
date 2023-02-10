@@ -1,6 +1,6 @@
 import cron from "node-cron";
-import bot_action_repository from "../../repository/bot_action_repository.js";
-import channel_repository from "../../repository/channel_repository.js";
+import bot_action_repository from "../../repository/guild/bot_action_repository.js";
+import channel_repository from "../../repository/guild/channel_repository.js";
 import economic_calendar_repository from "../../repository/economic_calendar_repository.js";
 import message_map from "../../utilities/message.js";
 

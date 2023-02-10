@@ -1,11 +1,10 @@
+import { Events, EmbedBuilder, Colors } from "discord.js";
 import config from "../../../config.json" assert { type: "json" };
 import retail_keywords from "../../utilities/retail_keywords.js";
-import guild_repository from "../../repository/guild_repository.js";
+import guild_repository from "../../repository/guild/guild_repository.js";
 import retail_violation_service from "../../service/retail_violation_service.js";
 import is_bot from "../../utilities/is_bot.js";
-import is_admin from "../../utilities/is_admin.js";
-import { Events, EmbedBuilder, Colors } from "discord.js";
-import bot_action_repository from "../../repository/bot_action_repository.js";
+import bot_action_repository from "../../repository/guild/bot_action_repository.js";
 
 const retail = async (client) => {
   client.on(Events.MessageCreate, async (message) => {

@@ -2,8 +2,8 @@ import message_map from "../../utilities/message.js";
 import high_impact_news from "../../utilities/high_impact_news.js";
 import cron from "node-cron";
 import economic_calendar_repository from "../../repository/economic_calendar_repository.js";
-import bot_action_repository from "../../repository/bot_action_repository.js";
-import channel_repository from "../../repository/channel_repository.js";
+import bot_action_repository from "../../repository/guild/bot_action_repository.js";
+import channel_repository from "../../repository/guild/channel_repository.js";
 
 const new_york = async (client) => {
   cron.schedule("0 13 * * 1-5", async () => {
@@ -12,7 +12,6 @@ const new_york = async (client) => {
     try {
       events = await economic_calendar_repository.today(["USD", "CAD"]);
     } catch (e) {
-      console.error(e.message);
       bot_action_repository.log(client, e.message, true);
 
       return;

@@ -1,5 +1,5 @@
 import { SlashCommandBuilder, EmbedBuilder, Colors } from "discord.js";
-import bot_action_repository from "../../repository/bot_action_repository.js";
+import bot_action_repository from "../../repository/guild/bot_action_repository.js";
 
 const data = new SlashCommandBuilder()
   .setName("passed_challenge")
@@ -9,7 +9,8 @@ const data = new SlashCommandBuilder()
   )
   .addStringOption((option) =>
     option.setName("propfirm").setDescription("The propfirm").setRequired(true)
-  );
+  )
+  .setDefaultMemberPermissions("0");
 
 const execute = async (client, interaction) => {
   const user = interaction.options.getUser("user", true);

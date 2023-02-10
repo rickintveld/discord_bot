@@ -1,4 +1,4 @@
-import config from "../../config.json" assert { type: "json" };
+import config from "../../../config.json" assert { type: "json" };
 
 const log = async (client) => {
   const channel = await client.channels.fetch(config.channels.bot.log);

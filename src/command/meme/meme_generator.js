@@ -1,6 +1,6 @@
 import { SlashCommandBuilder } from "discord.js";
 import meme_repository from "../../repository/meme_repository.js";
-import bot_action_repository from "../../repository/bot_action_repository.js";
+import bot_action_repository from "../../repository/guild/bot_action_repository.js";
 
 const data = new SlashCommandBuilder()
   .setName("meme")

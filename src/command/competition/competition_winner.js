@@ -1,5 +1,5 @@
 import { SlashCommandBuilder } from "discord.js";
-import bot_action_repository from "../../repository/bot_action_repository.js";
+import bot_action_repository from "../../repository/guild/bot_action_repository.js";
 
 const prices = [
   { name: "5k", value: "5k challenge" },

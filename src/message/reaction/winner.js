@@ -3,7 +3,7 @@ import winner_create_service from "../../service/winner_create_service.js";
 import has_attachments from "../../utilities/has_attachments.js";
 import contains_url from "../../utilities/contains_url.js";
 import { Events, MessageType } from "discord.js";
-import bot_action_repository from "../../repository/bot_action_repository.js";
+import bot_action_repository from "../../repository/guild/bot_action_repository.js";
 
 const winner = async (client) => {
   client.on(Events.MessageCreate, async (message) => {
@@ -16,7 +16,6 @@ const winner = async (client) => {
       winner_create_service.add(message.author);
 
       message.react("🔥");
-      message.react("🥂");
       message.react("🤑");
 
       bot_action_repository.log(

@@ -5,7 +5,7 @@ import config from "../config.json" assert { type: "json" };
 import cron from "./cron/crons.js";
 import message from "./message/message.js";
 
-function start() {
+const start = () => {
   const client = application.client();
 
   binding.commands.set(client);
@@ -17,7 +17,7 @@ function start() {
   message.monitor(client);
 
   client.login(config.token);
-}
+};
 
 const bot = { start };
 

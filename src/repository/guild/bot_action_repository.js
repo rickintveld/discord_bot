@@ -1,6 +1,5 @@
-import config from "../../config.json" assert { type: "json" };
 import { EmbedBuilder, Colors } from "discord.js";
-import channel_repository from "../repository/channel_repository.js";
+import channel_repository from "./channel_repository.js";
 
 const log = async (client, message, error) => {
   const channel = await channel_repository.log(client);

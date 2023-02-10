@@ -1,9 +1,6 @@
 import { Events, EmbedBuilder, Colors } from "discord.js";
 import live_trading from "./poll/live_trading.js";
 import competition_winner from "./competition/competition_winner.js";
-import winners_score from "../command/score_board/winners_score.js";
-import violation_score from "../command/score_board/violation_score.js";
-import threads_score from "./score_board/threads_score.js";
 import next_stage from "./journey/next_stage.js";
 import set_stage from "./journey/set_stage.js";
 import inactive_members from "./lurker/inactive_members.js";
@@ -13,15 +10,13 @@ import meme_generator from "./meme/meme_generator.js";
 import webinar from "./webinar/webinar.js";
 import passed_challenge from "./funded/passed_challenge.js";
 import invite from "./community/invite.js";
+import profit from "./trade/profit.js";
 
-import bot_action_repository from "../repository/bot_action_repository.js";
+import bot_action_repository from "../repository/guild/bot_action_repository.js";
 
 const commands = [
   live_trading.data,
   competition_winner.data,
-  winners_score.data,
-  violation_score.data,
-  threads_score.data,
   next_stage.data,
   set_stage.data,
   inactive_members.data,
@@ -31,6 +26,7 @@ const commands = [
   webinar.data,
   passed_challenge.data,
   invite.data,
+  profit.data,
 ].map((command) => command.toJSON());
 
 const execute = async (client) => {
