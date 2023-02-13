@@ -14,29 +14,25 @@ const add = async (data) => {
     date: date_format,
   };
 
-  const request_uri = new URL("add", api_uri);
+  const request_uri = new URL("profits/add", api_uri);
 
   const response = await axios.post(request_uri.href, payload);
-
-  const profit = response.data;
-};
-
-const get_by_id = async (user_id) => {
-  const response = await axios.get(`${api_uri.href}/user/${user_id}`, payload);
 
   const profit = response.data;
 
   return profit;
 };
 
-const get_all = async (date) => {
-  const response = await axios.get(`${api_uri.href}/date/${date}`, payload);
+const get_by_user_id = async (user_id) => {
+  const request_uri = new URL(`profits/${user_id}`, api_uri);
 
-  const users = response.data;
+  const response = await axios.get(request_uri.href);
 
-  return users;
+  const profit = response.data;
+
+  return profit;
 };
 
-const profit_api_repository = { add, get_all, get_by_id };
+const profit_api_repository = { add, get_by_user_id };
 
 export default profit_api_repository;
