@@ -8,9 +8,9 @@ import remove_inactive_member from "../../command/lurker/remove_inactive_member.
 import add_inactive_member from "../../command/lurker/add_inactive_member.js";
 import meme_generator from "../../command/meme/meme_generator.js";
 import webinar from "../../command/webinar/webinar.js";
+import new_webinar from "../../command/webinar/new_webinar.js";
 import passed_challenge from "../../command/funded/passed_challenge.js";
 import invite from "../../command/community/invite.js";
-import profit from "../../command/trade/profit.js";
 
 const set = (client) => {
   client.commands = new Collection();
@@ -24,9 +24,9 @@ const set = (client) => {
   client.commands.set(add_inactive_member.data.name, add_inactive_member);
   client.commands.set(meme_generator.data.name, meme_generator);
   client.commands.set(webinar.data.name, webinar);
+  client.commands.set(new_webinar.data.name, new_webinar);
   client.commands.set(passed_challenge.data.name, passed_challenge);
   client.commands.set(invite.data.name, invite);
-  client.commands.set(profit.data.name, profit);
 };
 
 export default set;

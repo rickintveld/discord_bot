@@ -18,6 +18,18 @@ async function fetch(id) {
   return webinar;
 }
 
+async function add(webinar_number, webinar_url) {
+  const database = await this._database();
+  await database.read();
+
+  database.data.webinars.push({
+    webinar: webinar_number,
+    url: webinar_url,
+  });
+
+  await database.write();
+}
+
 async function count() {
   const database = await this._database();
   await database.read();
@@ -52,6 +64,7 @@ async function _createTable(database) {
 }
 
 const webinar_repository = {
+  add,
   fetch,
   count,
   _database,

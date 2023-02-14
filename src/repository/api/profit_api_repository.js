@@ -11,10 +11,11 @@ const add = async (data) => {
   const payload = {
     user_id: parseInt(data.user_id),
     profit: data.profit,
-    date: date_format,
+    risk_to_reward: data.roi,
+    creation_date: date_format,
   };
 
-  const request_uri = new URL("profits/add", api_uri);
+  const request_uri = new URL("profits/create", api_uri);
 
   const response = await axios.post(request_uri.href, payload);
 
