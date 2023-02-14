@@ -5,6 +5,7 @@ import bot_action_repository from "../../repository/guild/bot_action_repository.
 const data = new SlashCommandBuilder()
   .setName("new-webinar")
   .setDescription("Adds a new webinar")
+  .setDefaultMemberPermissions("0")
   .addIntegerOption((option) =>
     option
       .setName("webinar")
