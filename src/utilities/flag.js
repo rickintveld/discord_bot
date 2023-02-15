@@ -11,6 +11,12 @@ const flag_map = (country) => {
     case "CAD":
       flag = ":flag_ca:";
       break;
+    case "JPY":
+      flag = ":flag_jp:";
+      break;
+    case "AUD":
+      flag = ":flag_au:";
+      break;
     default:
       flag = ":flag_us:";
   }

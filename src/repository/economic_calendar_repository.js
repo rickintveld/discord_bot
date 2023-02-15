@@ -12,20 +12,19 @@ const tomorrow = async (countries) => {
     .filter((event) => countries.includes(event.country))
     .filter((event) => {
       const date = new Date();
-      const event_date = new Date(event.date);
-
       date.setDate(date.getDate() + 1);
       date.setHours(0, 0, 0, 0);
-      event_date.setDate(event_date.getDate() + 1);
+
+      const event_date = new Date(event.date);
       event_date.setHours(0, 0, 0, 0);
 
-      if (date === event_date) {
+      if (date.getTime() === event_date.getTime()) {
         return event;
       }
     });
 
-  if (!events) {
-    throw new Error(`No ${countries.join("")} news today`);
+  if (events.length === 0) {
+    throw new Error(`No ${countries.join(" & ")} news today`);
   }
 
   return events;
@@ -49,8 +48,8 @@ const today = async (countries) => {
       }
     });
 
-  if (!events) {
-    throw new Error(`No ${countries.join("")} news for tomorrow`);
+  if (events.length === 0) {
+    throw new Error(`No ${countries.join(" & ")} news for tomorrow`);
   }
 
   return events;

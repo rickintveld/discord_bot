@@ -6,7 +6,7 @@ import message_map from "../../utilities/message.js";
 
 const asia = async (client) => {
   cron.schedule("0 23 * * 1-5", async () => {
-    const countries = ["JPY", "AUD", "NZD", "CNY"];
+    const countries = ["JPY", "AUD"];
     let events = null;
 
     try {
