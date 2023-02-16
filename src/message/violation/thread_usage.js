@@ -68,6 +68,7 @@ const is_channel_allowed = (message) => {
     config.channels.setups,
     config.channels.winners,
     config.channels.market_outlook,
+    config.channels.losses,
   ].includes(Number(message.channelId));
 };
 
