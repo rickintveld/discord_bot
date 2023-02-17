@@ -4,11 +4,31 @@ import {
   TextInputBuilder,
   ModalBuilder,
   TextInputStyle,
+  ButtonBuilder,
+  ButtonStyle,
 } from "discord.js";
 
 const introduction_modal = async (client) => {
   client.on(Events.InteractionCreate, async (interaction) => {
     if (interaction.isButton() && interaction.customId === "introduce_btn") {
+      const filter = (i) => i.customId === "introduce_btn";
+      const collector = interaction.channel.createMessageComponentCollector({
+        filter,
+        time: 15000,
+      });
+
+      const button = new ActionRowBuilder().addComponents(
+        new ButtonBuilder()
+          .setCustomId("introduction_triggered")
+          .setLabel("Thank you!")
+          .setStyle(ButtonStyle.Success)
+          .setDisabled(true)
+      );
+
+      collector.on("collect", async (i) => {
+        await i.update({ components: [button] });
+      });
+
       const modal = new ModalBuilder()
         .setCustomId("introduction_modal")
         .setTitle("Introduction");

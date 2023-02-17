@@ -37,14 +37,14 @@ const new_user = async (client) => {
       false
     );
 
-    const row = new ActionRowBuilder().addComponents(
+    const button = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
         .setCustomId("introduce_btn")
         .setLabel("Do introduction!")
         .setStyle(ButtonStyle.Primary)
     );
 
-    channel.send({ embeds: [embed_message], components: [row] });
+    channel.send({ embeds: [embed_message], components: [button] });
   });
 };
 
