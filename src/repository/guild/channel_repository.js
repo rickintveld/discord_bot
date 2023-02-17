@@ -32,6 +32,26 @@ const general = async (client) => {
   return channel;
 };
 
-const channel = { announcements, economic_calendar, log, general, rules };
+const journey = async (client) => {
+  const channel = await client.channels.fetch(config.channels.journey);
+
+  return channel;
+};
+
+const bot_action = async (client) => {
+  const channel = await client.channels.fetch(config.channels.bot.actions);
+
+  return channel;
+};
+
+const channel = {
+  announcements,
+  economic_calendar,
+  log,
+  general,
+  rules,
+  journey,
+  bot_action,
+};
 
 export default channel;

@@ -5,7 +5,7 @@ import economic_calendar_repository from "../../repository/economic_calendar_rep
 import message_map from "../../utilities/message.js";
 
 const europe = async (client) => {
-  cron.schedule("30 8 * * 1-5", async () => {
+  cron.schedule("0 8 * * 1-5", async () => {
     const countries = ["EUR", "GBP"];
     let events = null;
 
