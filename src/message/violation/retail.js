@@ -38,7 +38,7 @@ const retail = async (client) => {
       try {
         await guild_repository.timeout(member, "No retail bs allowed");
 
-        await retail_violation_service.add(member.user);
+        // await retail_violation_service.add(member.user);
 
         bot_action_repository.log(
           client,
