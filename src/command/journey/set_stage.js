@@ -29,7 +29,7 @@ const execute = async (client, interaction) => {
   const member = await guild.members.fetch(user.id);
 
   member._roles.forEach((role) => {
-    if (role_mapping.has_role(role)) {
+    if (role_mapping.has_role(role) || role_mapping.is_new_member(role)) {
       member.roles.remove(role);
     }
   });
