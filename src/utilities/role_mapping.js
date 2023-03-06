@@ -38,6 +38,10 @@ const is_new_member = (role) => {
   return new_member === role;
 };
 
+const has_new_member_role = (roles) => {
+  return roles.includes(new_member);
+};
+
 const role_id_map = (id) => {
   const roles = new Map();
   roles.set(1, phase_1);
@@ -54,6 +58,13 @@ const role_id_map = (id) => {
   return roles.get(id);
 };
 
-const role_mapping = { next, has_role, is_new_member, role_id_map, new_member };
+const role_mapping = {
+  next,
+  has_role,
+  is_new_member,
+  has_new_member_role,
+  role_id_map,
+  new_member,
+};
 
 export default role_mapping;

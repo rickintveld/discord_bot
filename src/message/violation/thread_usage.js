@@ -1,6 +1,5 @@
 import { Events, MessageType, EmbedBuilder, Colors } from "discord.js";
 import config from "../../../config.json" assert { type: "json" };
-import thread_violation_repository from "../../repository/thread_violation_repository.js";
 import guild_repository from "../../repository/guild/guild_repository.js";
 import has_attachments from "../../utilities/has_attachments.js";
 import contains_url from "../../utilities/contains_url.js";
@@ -19,41 +18,14 @@ const thread_usage = async (client) => {
     const username = message.author.username;
     const user_id = message.author.id;
 
-    console.log(`Adding ${username} to the thread_usage violators`);
-
-    const user = await thread_violation_repository.fetch(user_id);
-    let strike = user?.strike ?? 0;
-
-    let replyMessage = "Please use threads :innocent:";
-
     const embed_message = new EmbedBuilder().setColor(Colors.Red);
 
-    switch (strike) {
-      case 1:
-        replyMessage = "Please use threads :angry:";
-        await thread_violation_repository.update(user_id);
-        break;
-      case 2:
-        replyMessage = "Please use threads :rage:";
-        await thread_violation_repository.update(user_id);
-        break;
-      default:
-        await thread_violation_repository.add(user_id, username, 1);
-    }
+    const member = await message.guild.members.fetch(user_id);
 
-    if (strike > 2) {
-      const member = await message.guild.members.fetch(user_id);
+    embed_message.setDescription(`${username} Please use threads :innocent:`);
+    await message.reply({ embeds: [embed_message] });
 
-      embed_message.setDescription(
-        `${username} received a 10 seconde timeout for not using threads!`
-      );
-      await message.reply({ embeds: [embed_message] });
-
-      await guild_repository.timeout(member, "Timeout for not using threads");
-    } else {
-      embed_message.setDescription(replyMessage);
-      await message.reply({ embeds: [embed_message] });
-    }
+    await guild_repository.timeout(member, "Timeout for not using threads");
 
     bot_action_repository.log(
       client,

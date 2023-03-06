@@ -3,9 +3,6 @@ import live_trading from "./poll/live_trading.js";
 import competition_winner from "./competition/competition_winner.js";
 import next_stage from "./journey/next_stage.js";
 import set_stage from "./journey/set_stage.js";
-import inactive_members from "./lurker/inactive_members.js";
-import remove_inactive_member from "./lurker/remove_inactive_member.js";
-import add_inactive_member from "./lurker/add_inactive_member.js";
 import meme_generator from "./meme/meme_generator.js";
 import webinar from "./webinar/webinar.js";
 import new_webinar from "./webinar/new_webinar.js";
@@ -19,9 +16,6 @@ const commands = [
   competition_winner.data,
   next_stage.data,
   set_stage.data,
-  inactive_members.data,
-  remove_inactive_member.data,
-  add_inactive_member.data,
   meme_generator.data,
   webinar.data,
   new_webinar.data,

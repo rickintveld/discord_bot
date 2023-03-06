@@ -1,6 +1,5 @@
 import { SlashCommandBuilder, EmbedBuilder, Colors } from "discord.js";
 import config from "../../../config.json" assert { type: "json" };
-import lurker_repository from "../../repository/lurker_repository.js";
 import bot_action_repository from "../../repository/guild/bot_action_repository.js";
 import role_mapping from "../../utilities/role_mapping.js";
 
@@ -35,10 +34,6 @@ const execute = async (client, interaction) => {
   });
 
   member.roles.add(role);
-
-  if (lurker_repository.fetch(member.user.id)) {
-    lurker_repository.remove(member.user.id);
-  }
 
   const description = `${user.toString()} has been given journey stage role ${role.toString()}`;
 
